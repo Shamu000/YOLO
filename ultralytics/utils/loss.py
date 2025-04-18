@@ -37,6 +37,60 @@ class VarifocalLoss(nn.Module):
         return loss
 
 
+#VarifocalLoss2是将varifocalloss结果只求和不平均
+class VarifocalLoss2(nn.Module):
+    """
+    Varifocal loss by Zhang et al.
+
+    https://arxiv.org/abs/2008.13367.
+    """
+
+    def __init__(self):
+        """Initialize the VarifocalLoss class."""
+        super().__init__()
+
+    @staticmethod
+    def forward(pred_score, gt_score, label, alpha=0.75, gamma=2.0):
+        #默认参数alpha=0.75, gamma=2.0
+        """Computes varfocal loss."""
+        weight = alpha * pred_score.sigmoid().pow(gamma) * (1 - label) + gt_score * label
+        with autocast(enabled=False):
+            loss = (
+                (F.binary_cross_entropy_with_logits(pred_score.float(), gt_score.float(), reduction="none") * weight)
+                .sum()
+            )
+        return loss
+
+
+# MyFocalLoss2 是在bce外面包上FocalLoss，最后得到的张量求和
+class MyFocalLoss2(nn.Module):
+    """Wraps focal loss around existing loss_fcn(), i.e. criteria = FocalLoss(nn.BCEWithLogitsLoss(), gamma=1.5)."""
+
+    def __init__(self):
+        """Initializer for FocalLoss class with no parameters."""
+        super().__init__()
+
+    @staticmethod
+    def forward(pred, target, label, gamma=1.5, alpha=0.25):
+        # 默认 gamma=1.5, alpha=0.25
+        """Calculates and updates confusion matrix for object detection/classification tasks."""
+        bce = nn.BCEWithLogitsLoss(reduction="none")
+        loss = bce(pred, target)
+        # p_t = torch.exp(-loss)
+        # loss *= self.alpha * (1.000001 - p_t) ** self.gamma  # non-zero power for gradient stability
+
+        # TF implementation https://github.com/tensorflow/addons/blob/v0.7.1/tensorflow_addons/losses/focal_loss.py
+        pred_prob = pred.sigmoid()  # prob from logits
+
+        p_t = label * pred_prob + (1 - label) * (1 - pred_prob)
+        modulating_factor = (1.0 - p_t) ** gamma
+        loss *= modulating_factor
+        if alpha > 0:
+            alpha_factor = label * alpha + (1 - label) * (1 - alpha)
+            loss *= alpha_factor
+        return loss.sum()
+
+
 class FocalLoss(nn.Module):
     """Wraps focal loss around existing loss_fcn(), i.e. criteria = FocalLoss(nn.BCEWithLogitsLoss(), gamma=1.5)."""
 
@@ -446,6 +500,8 @@ class v8PoseLoss(v8DetectionLoss):
         super().__init__(model)
         self.kpt_shape = model.model[-1].kpt_shape
         self.bce_pose = nn.BCEWithLogitsLoss()
+        self.focal_loss=MyFocalLoss2()
+        self.varifocal_loss =VarifocalLoss2()
         is_pose = self.kpt_shape == [17, 3]
         nkpt = self.kpt_shape[0]  # number of keypoints
         sigmas = torch.from_numpy(OKS_SIGMA).to(self.device) if is_pose else torch.ones(nkpt, device=self.device) / nkpt
@@ -493,7 +549,10 @@ class v8PoseLoss(v8DetectionLoss):
 
         # Cls loss
         # loss[1] = self.varifocal_loss(pred_scores, target_scores, target_labels) / target_scores_sum  # VFL way
-        loss[3] = self.bce(pred_scores, target_scores.to(dtype)).sum() / target_scores_sum  # BCE
+        # loss[3] = self.bce(pred_scores, target_scores.to(dtype)).sum() / target_scores_sum  # BCE
+        target_labels = torch.zeros_like(target_scores)  # (b, h*w, 1)
+        target_labels[fg_mask] = 1.0
+        loss[3] = self.focal_loss(pred_scores, target_scores, target_labels)/ target_scores_sum
 
         # Bbox loss
         if fg_mask.sum():
