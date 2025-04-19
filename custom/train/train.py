@@ -2,18 +2,18 @@ import os
 from ultralytics import YOLO
 
 
-model = YOLO('ultralytics/cfg/models/11/yolo11n-pose.yaml')
+model = YOLO('yolo11n-pose.pt')
 
 model.train(
     # ------------------------ 训练任务配置 ------------------------
     task='pose',                     # 任务类型，关键点检测为 'pose'
     mode='train',                   # 模式，训练用 'train'
-    model='yolov11n-pose.pt',       # 权重路径或模型定义
+    model='yolo11n-pose.pt',       # 权重路径或模型定义
     data='custom/cfg/datasets.yaml',# 数据配置文件路径
     epochs=100,                     # 训练总轮数
     time=None,                      # 最大训练时长（小时），设置后覆盖 epochs
     patience=100,                   # 早停等待轮数
-    batch=16,                       # 每批次图像数量，-1 表示自动调整
+    batch=-1,                       # 每批次图像数量，-1 表示自动调整
     imgsz=640,                      # 输入图像尺寸（可设为 int 或 list）
 
     save=True,                      # 是否保存训练检查点
@@ -21,8 +21,6 @@ model.train(
     cache=False,                   # 数据是否使用缓存（False, 'ram', 'disk'）
     device='0',                     # 指定训练设备（如 'cpu', '0', '0,1'）
     workers=8,                      # DataLoader 使用的线程数
-    project='runs/pose',           # 项目输出路径
-    name='yolov11n_pose_exp',      # 实验名称（保存在 project/name 目录下）
     exist_ok=False,                # 若路径存在是否允许覆盖
 
     pretrained=True,               # 是否加载预训练模型（True / 模型路径）
