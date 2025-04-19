@@ -8,7 +8,6 @@ model.train(
     # ------------------------ 训练任务配置 ------------------------
     task='pose',                     # 任务类型，关键点检测为 'pose'
     mode='train',                   # 模式，训练用 'train'
-    model='yolo11n-pose.pt',       # 权重路径或模型定义
     data='custom/cfg/datasets.yaml',# 数据配置文件路径
     epochs=100,                     # 训练总轮数
     time=None,                      # 最大训练时长（小时），设置后覆盖 epochs
