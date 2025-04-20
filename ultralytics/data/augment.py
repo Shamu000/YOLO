@@ -2371,7 +2371,7 @@ class RandomLoadText:
         labels["texts"] = texts
         return labels
 
-
+import custom.augment.pprocess as pprocess
 def v8_transforms(dataset, imgsz, hyp, stretch=False):
     """
     Applies a series of image transformations for training.
@@ -2429,6 +2429,7 @@ def v8_transforms(dataset, imgsz, hyp, stretch=False):
 
     return Compose(
         [
+            pprocess.process,
             pre_transform,
             MixUp(dataset, pre_transform=pre_transform, p=hyp.mixup),
             Albumentations(p=1.0),
