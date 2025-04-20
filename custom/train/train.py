@@ -10,37 +10,19 @@ model.train(
     mode='train',                   # 模式，训练用 'train'
     data='custom/cfg/datasets.yaml',# 数据配置文件路径
     epochs=100,                     # 训练总轮数
-    time=None,                      # 最大训练时长（小时），设置后覆盖 epochs
     patience=100,                   # 早停等待轮数
     batch=-1,                       # 每批次图像数量，-1 表示自动调整
     imgsz=640,                      # 输入图像尺寸（可设为 int 或 list）
-
-    save=True,                      # 是否保存训练检查点
-    save_period=-1,                # 每多少 epoch 保存一次模型（-1 表示只保存最后）
-    cache=False,                   # 数据是否使用缓存（False, 'ram', 'disk'）
     device='0',                     # 指定训练设备（如 'cpu', '0', '0,1'）
     workers=8,                      # DataLoader 使用的线程数
-    exist_ok=False,                # 若路径存在是否允许覆盖
-
     pretrained=True,               # 是否加载预训练模型（True / 模型路径）
     optimizer='auto',              # 优化器类型（'SGD', 'Adam', 等）
-    verbose=True,                  # 是否输出详细训练信息
-    seed=0,                         # 随机种子
-    deterministic=True,           # 是否使用确定性训练（保证复现性）
-    single_cls=False,             # 是否将多类别作为单类别处理
-    rect=False,                   # 是否使用矩形训练（加快训练）
     cos_lr=False,                 # 是否使用余弦学习率调度器
     close_mosaic=10,              # 关闭 mosaic 增强的 epoch 数（后期 fine-tune）
     resume=False,                 # 是否从上一次训练断点继续训练
-    amp=True,                     # 是否启用混合精度训练
     fraction=1.0,                 # 使用数据集的比例
-    profile=False,                # 是否 profile ONNX/TensorRT 推理速度
     freeze=None,                  # 冻结前 n 层或指定层索引列表
     multi_scale=False,           # 是否启用多尺度训练
-
-    # ------------------------ 分割（Segmentation）专用参数 ------------------------
-    overlap_mask=True,            # 是否合并 instance 的 mask（只用于 segmentation）
-    mask_ratio=4,                 # mask 的下采样倍数
 
     # ------------------------ 分类（Classification）专用参数 ------------------------
     dropout=0.0,                  # dropout 概率（只用于分类任务）
