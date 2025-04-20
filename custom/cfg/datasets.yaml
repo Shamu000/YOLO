@@ -1,6 +1,16 @@
-path:  # dataset root dir
-train: images/train # train images (relative to 'path') 118287 images
-val: images/val # val images (relative to 'path') 5000 images
+#path:  # dataset root dir
+train: ["/home/wyc/Yolo11/datasets/Labeled212/images/train","/home/wyc/Yolo11/datasets/0112哨兵拍摄/images/train",
+"/home/wyc/Yolo11/datasets/0112哨兵拍摄2/images/train","/home/wyc/Yolo11/datasets/0112哨兵拍摄3/images/train",
+"/home/wyc/Yolo11/datasets/0115旋转装甲板拍摄/images/train","/home/wyc/Yolo11/datasets/0210英雄工程拍摄/images/train",
+"/home/wyc/Yolo11/datasets/0210英雄工程拍摄2/images/train","/home/wyc/Yolo11/datasets/0210英雄工程拍摄3/images/train",
+"/home/wyc/Yolo11/datasets/0210英雄工程拍摄4/images/train","/home/wyc/Yolo11/datasets/0216拍摄/images/train",
+        "/home/wyc/Yolo11/datasets/0416前哨站1/images/train","/home/wyc/Yolo11/datasets/0416前哨站1/images/train"] # train images (relative to 'path') 118287 images
+val: ["/home/wyc/Yolo11/datasets/Labeled212/images/val","/home/wyc/Yolo11/datasets/0112哨兵拍摄/images/val",
+"/home/wyc/Yolo11/datasets/0112哨兵拍摄2/images/val","/home/wyc/Yolo11/datasets/0112哨兵拍摄3/images/val",
+"/home/wyc/Yolo11/datasets/0115旋转装甲板拍摄/images/val","/home/wyc/Yolo11/datasets/0210英雄工程拍摄/images/val",
+"/home/wyc/Yolo11/datasets/0210英雄工程拍摄2/images/val","/home/wyc/Yolo11/datasets/0210英雄工程拍摄3/images/val",
+"/home/wyc/Yolo11/datasets/0210英雄工程拍摄4/images/val","/home/wyc/Yolo11/datasets/0216拍摄/images/val",
+"/home/wyc/Yolo11/datasets/0416前哨站1/images/val","/home/wyc/Yolo11/datasets/0416前哨站1/images/val"] # val images (relative to 'path') 5000 images
 
 kpt_shape: [4,2]
 
