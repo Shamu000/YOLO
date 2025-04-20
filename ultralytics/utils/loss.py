@@ -549,10 +549,10 @@ class v8PoseLoss(v8DetectionLoss):
 
         # Cls loss
         # loss[1] = self.varifocal_loss(pred_scores, target_scores, target_labels) / target_scores_sum  # VFL way
-        # loss[3] = self.bce(pred_scores, target_scores.to(dtype)).sum() / target_scores_sum  # BCE
-        target_labels = torch.zeros_like(target_scores)  # (b, h*w, 1)
-        target_labels[fg_mask] = 1.0
-        loss[3] = self.focal_loss(pred_scores, target_scores, target_labels)/ target_scores_sum
+        loss[3] = self.bce(pred_scores, target_scores.to(dtype)).sum() / target_scores_sum  # BCE
+        # target_labels = torch.zeros_like(target_scores)  # (b, h*w, 1)
+        # target_labels[fg_mask] = 1.0
+        # loss[3] = self.focal_loss(pred_scores, target_scores, target_labels)/ target_scores_sum
 
         # Bbox loss
         if fg_mask.sum():
