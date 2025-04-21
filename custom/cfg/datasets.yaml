@@ -18,7 +18,6 @@ train:
   - 0321内录/images/train
   - 0323内录/images/train
   - 0323内录2/images/train
-  - 0323内录3/images/train
   - 0329省赛内录/images/train
   - 0416前哨站1/images/train
   - 0416前哨站2/images/train
@@ -42,7 +41,6 @@ val:
   - 0321内录/images/val
   - 0323内录/images/val
   - 0323内录2/images/val
-  - 0323内录3/images/val
   - 0329省赛内录/images/val
   - 0416前哨站1/images/val
   - 0416前哨站2/images/val

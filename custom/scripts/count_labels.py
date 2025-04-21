@@ -38,37 +38,57 @@ def count_labels_in_dataset(label_dir):
     return label_counts
 
 
-def main(dataset_root):
-    # 检查是否为特殊的 "测试集"
-    if dataset_root == "/home/wyc/Yolo11/datasets/测试集":
-        # 如果是测试集，只需要处理 labels 文件夹
-        test_label_dir = os.path.join(dataset_root, "labels")  # 测试集标签路径
-        label_counts = count_labels_in_dataset(test_label_dir)
+def main(datasets_root):
+    # 用于统计所有数据集类别总数
+    total_label_counts = {i: 0 for i in range(27)}
 
-        print("测试集标签统计:")
-        for category, count in label_counts.items():
-            if count > 0:
-                print(f"{CATEGORY_NAMES.get(category, 'Unknown Category')} : {count} 次")
-    else:
-        # 自动补全训练集和验证集标签路径
-        train_label_dir = os.path.join(dataset_root, "labels/train")  # 训练集标签路径
-        val_label_dir = os.path.join(dataset_root, "labels/val")  # 验证集标签路径
+    # 遍历 datasets 文件夹下的所有数据集
+    for dataset_name in os.listdir(datasets_root):
+        dataset_path = os.path.join(datasets_root, dataset_name)
 
-        # 统计训练集和验证集的标签
-        train_label_counts = count_labels_in_dataset(train_label_dir)
-        val_label_counts = count_labels_in_dataset(val_label_dir)
+        if os.path.isdir(dataset_path):  # 如果是一个文件夹，表示是一个数据集
+            print(f"\n统计数据集: {dataset_name}")
 
-        print("训练集标签统计:")
-        for category, count in train_label_counts.items():
-            if count > 0:
-                print(f"{CATEGORY_NAMES.get(category, 'Unknown Category')} : {count} 次")
+            # 如果是测试集，直接处理 images 和 labels 文件夹
+            if dataset_name == "测试集":  # 根据实际情况修改测试集文件夹的名称
+                test_label_dir = os.path.join(dataset_path, "labels")  # 测试集标签路径
+                if os.path.exists(test_label_dir):
+                    label_counts = count_labels_in_dataset(test_label_dir)
+                    print("测试集标签统计:")
+                    for category, count in label_counts.items():
+                        if count > 0:
+                            print(f"{CATEGORY_NAMES.get(category, 'Unknown Category')} : {count} 次")
+                            total_label_counts[category] += count
 
-        print("\n验证集标签统计:")
-        for category, count in val_label_counts.items():
-            if count > 0:
-                print(f"{CATEGORY_NAMES.get(category, 'Unknown Category')} : {count} 次")
+            else:
+                # 自动补全训练集和验证集标签路径
+                train_label_dir = os.path.join(dataset_path, "labels/train")  # 训练集标签路径
+                val_label_dir = os.path.join(dataset_path, "labels/val")  # 验证集标签路径
+
+                # 统计训练集和验证集的标签
+                if os.path.exists(train_label_dir):
+                    train_label_counts = count_labels_in_dataset(train_label_dir)
+                    print("训练集标签统计:")
+                    for category, count in train_label_counts.items():
+                        if count > 0:
+                            print(f"{CATEGORY_NAMES.get(category, 'Unknown Category')} : {count} 次")
+                            total_label_counts[category] += count
+
+                if os.path.exists(val_label_dir):
+                    val_label_counts = count_labels_in_dataset(val_label_dir)
+                    print("\n验证集标签统计:")
+                    for category, count in val_label_counts.items():
+                        if count > 0:
+                            print(f"{CATEGORY_NAMES.get(category, 'Unknown Category')} : {count} 次")
+                            total_label_counts[category] += count
+
+    # 输出所有数据集中的类别总数
+    print("\n所有数据集类别总计:")
+    for category, count in total_label_counts.items():
+        if count > 0:
+            print(f"{CATEGORY_NAMES.get(category, 'Unknown Category')} : {count} 次")
 
 
 if __name__ == "__main__":
-    dataset_root = "/home/wyc/Yolo11/datasets/测试集"  # 提示用户输入数据集根路径
-    main(dataset_root)
+    datasets_root = "/home/wyc/Yolo11/datasets"  # 总数据集根目录
+    main(datasets_root)
