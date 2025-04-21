@@ -49,5 +49,5 @@ def check_and_remove_files(folder_path):
                 os.remove(file_path)
 
 # 使用函数
-folder_path = '/home/wyc/Yolo11/datasets/Labeled212/labels/train'  # 你的文件夹路径
+folder_path = '/home/marshal_kim/下载/0420蓝3拍摄/labels'  # 你的文件夹路径
 check_and_remove_files(folder_path)
