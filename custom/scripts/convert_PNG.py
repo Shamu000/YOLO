@@ -1,42 +1,44 @@
 import os
 from PIL import Image
+from multiprocessing import Pool, cpu_count
 
 
-def convert_images_to_png(input_dir, output_dir):
-    # 检查输出目录是否存在，如果不存在则创建
+def convert_to_png(task):
+    file_path, output_dir = task
+    filename = os.path.basename(file_path)
+    ext = filename.split('.')[-1].lower()
+
+    if ext not in ['jpg', 'jpeg', 'bmp', 'gif', 'tiff', 'webp']:
+        return None  # 不是支持的图片格式
+
+    try:
+        img = Image.open(file_path)
+        output_path = os.path.join(output_dir, f"{os.path.splitext(filename)[0]}.png")
+        img.save(output_path, 'PNG')
+        print(f"Converted: {filename}")
+    except Exception as e:
+        print(f"Error converting {filename}: {e}")
+
+
+def convert_images_to_png_parallel(input_dir, output_dir, num_processes=None):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    # 遍历输入目录中的所有文件
+    tasks = []
     for filename in os.listdir(input_dir):
-        # 获取文件路径
         file_path = os.path.join(input_dir, filename)
-
-        # 只处理文件，不处理子目录
         if os.path.isfile(file_path):
-            # 获取文件扩展名并将其转化为小写
-            ext = filename.split('.')[-1].lower()
+            tasks.append((file_path, output_dir))
 
-            # 过滤非图片格式的文件
-            if ext in ['jpg', 'jpeg', 'bmp', 'gif', 'tiff', 'webp']:
-                # 打开图片
-                try:
-                    img = Image.open(file_path)
+    # 设置进程数（默认使用 CPU 核心数）
+    num_processes = num_processes or cpu_count()
 
-                    # 设置输出文件路径（替换扩展名为 png）
-                    output_path = os.path.join(output_dir, f"{os.path.splitext(filename)[0]}.png")
-
-                    # 保存为 png 格式
-                    img.save(output_path, 'PNG')
-                    print(f"Converted: {filename} to PNG")
-                except Exception as e:
-                    print(f"Error converting {filename}: {e}")
+    with Pool(num_processes) as pool:
+        pool.map(convert_to_png, tasks)
 
 
 if __name__ == "__main__":
-    # 指定输入和输出路径
-    input_dir = '/home/marshal_kim/下载/0420蓝3拍摄'  # 输入路径，替换为你的路径
-    output_dir = '/home/marshal_kim/下载/0420蓝3拍摄PNG'  # 输出路径，替换为你的路径
+    input_dir = '/home/wyc/Downloads/0422测试集拍摄'
+    output_dir = '/home/wyc/Downloads/0422测试集拍摄PNG'
 
-    # 调用转换函数
-    convert_images_to_png(input_dir, output_dir)
+    convert_images_to_png_parallel(input_dir, output_dir)
