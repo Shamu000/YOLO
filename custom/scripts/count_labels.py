@@ -3,10 +3,10 @@ import os
 # 类别名称映射
 CATEGORY_NAMES = {
     0: 'Blue Sentinel', 1: 'Blue Hero 1', 2: 'Blue Engineer 2', 3: 'Blue Unit 3',
-    4: 'Blue Unit 4', 5: 'Blue Unit 5', 6: 'Blue Outpost', 7: 'Blue Base',
-    8: 'Blue Base Armor', 9: 'Red Sentinel', 10: 'Red Hero 1', 11: 'Red Engineer 2',
+    4: 'Blue Unit 4', 5: 'Blue Unit 5', 6: 'Blue Outpost', 7: 'Blue Small Base',
+    8: 'Blue Large Base', 9: 'Red Sentinel', 10: 'Red Hero 1', 11: 'Red Engineer 2',
     12: 'Red Unit 3', 13: 'Red Unit 4', 14: 'Red Unit 5', 15: 'Red Outpost',
-    16: 'Red Base', 17: 'Red Base Armor', 18: 'Off Sentinel', 19: 'Off Hero 1',
+    16: 'Red Small Base', 17: 'Red Large Base', 18: 'Off Sentinel', 19: 'Off Hero 1',
     20: 'Off Engineer 2', 21: 'Off Unit 3', 22: 'Off Unit 4', 23: 'Off Unit 5',
     24: 'Off Outpost', 25: 'Off Base', 26: 'Off Base Armor'
 }
