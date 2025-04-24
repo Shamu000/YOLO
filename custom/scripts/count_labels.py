@@ -77,5 +77,5 @@ def main(datasets_root):
 
 
 if __name__ == "__main__":
-    datasets_root = "/media/zjy/TOSHIBA EXT/330_RMUL_上午"
+    datasets_root = "/home/wyc/Yolo11/datasets"
     main(datasets_root)
