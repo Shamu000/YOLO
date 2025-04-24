@@ -5,33 +5,33 @@ import numpy as np
 def visualize_annotations(image_folder, annotation_folder):
     # 定义类别映射字典
     category_mapping = {
-        0: "BG",
+        0: "BS",
         1: "B1",
         2: "B2",
         3: "B3",
         4: "B4",
         5: "B5",
         6: "BO",
-        7: "BBs",
-        8: "BBb",
-        9: "RG",
+        7: "BSB",
+        8: "BLB",
+        9: "RS",
         10: "R1",
         11: "R2",
         12: "R3",
         13: "R4",
         14: "R5",
         15: "RO",
-        16: "RBs",
-        17: "RBb",
-        18: "NG",
-        19: "N1",
-        20: "N2",
-        21: "N3",
-        22: "N4",
-        23: "N5",
-        24: "NO",
-        25: "NBs",
-        26: "NBb"
+        16: "RSB",
+        17: "RLB",
+        18: "OS",
+        19: "O1",
+        20: "O2",
+        21: "O3",
+        22: "O4",
+        23: "O5",
+        24: "OO",
+        25: "OSB",
+        26: "OLB"
     }
 
     # 获取所有图片文件名
@@ -72,9 +72,9 @@ def visualize_annotations(image_folder, annotation_folder):
             
             # 根据类别标签首字母确定绘制颜色：B-蓝、R-红、N-绿，否则白色
             if label_str.startswith("B"):
-                box_color = (255, 0, 0)  # 蓝色 (BGR: 蓝)
+                box_color = (0, 0, 255)  # 蓝色 (BGR: 蓝)
             elif label_str.startswith("R"):
-                box_color = (0, 0, 255)  # 红色 (BGR: 红)
+                box_color = (255, 0, 0)  # 红色 (BGR: 红)
             elif label_str.startswith("N"):
                 box_color = (0, 255, 0)  # 绿色 (BGR: 绿)
             else:
@@ -87,13 +87,13 @@ def visualize_annotations(image_folder, annotation_folder):
 
             # 绘制角点（可选，用来辅助查看角点位置）
             for corner in corners:
-                cv2.circle(image, tuple(corner.astype(int)), 5, box_color, -1)
+                cv2.circle(image, tuple(corner.astype(int)), 1, box_color, -1)
 
-            # 绘制四边形：按顺序连接角点
-            for i in range(4):
-                start_point = tuple(corners[i].astype(int))
-                end_point = tuple(corners[(i + 1) % 4].astype(int))
-                cv2.line(image, start_point, end_point, box_color, 2)
+            # # 绘制四边形：按顺序连接角点
+            # for i in range(4):
+            #     start_point = tuple(corners[i].astype(int))
+            #     end_point = tuple(corners[(i + 1) % 4].astype(int))
+            #     cv2.line(image, start_point, end_point, box_color, 1)
 
             # 计算边界框左上角（最小的x和y）作为文本显示的位置
             x_min = int(np.min(corners[:, 0]))
@@ -109,6 +109,6 @@ def visualize_annotations(image_folder, annotation_folder):
     cv2.destroyAllWindows()
 
 # 替换为你的图片和标注文件夹路径喵~
-image_folder = '/mnt/d/netgroup/数据集/烧饼1剩余_已标_未处理/1/images/train'
-annotation_folder = '/mnt/d/netgroup/数据集/烧饼1剩余_已标_未处理/1/labels/train'
+image_folder = '/home/wyc/Yolo11/datasets/0420蓝3拍摄/images/train'
+annotation_folder = '/home/wyc/Yolo11/datasets/0420蓝3拍摄/labels/train'
 visualize_annotations(image_folder, annotation_folder)
