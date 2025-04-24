@@ -2,7 +2,7 @@ import os
 import shutil
 
 # 设置文件夹路径
-source_dir = "/home/marshal_kim/下载/0420蓝3拍摄"  # 数据集文件夹路径
+source_dir = "/media/zjy/TOSHIBA EXT/330_RMUL_上午"  # 数据集文件夹路径
 images_dir = os.path.join(source_dir, "images")
 labels_dir = os.path.join(source_dir, "labels")
 
