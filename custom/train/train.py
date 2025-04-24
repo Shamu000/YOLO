@@ -36,8 +36,8 @@ model.train(
     warmup_momentum=0.8,         # 预热初始动量
     warmup_bias_lr=0.1,          # 预热阶段 bias 的学习率
 
-    box=7.5,                     # 边界框损失权重
-    cls=0.5,                     # 分类损失权重
+    box=0.5,                     # 边界框损失权重
+    cls=7.5,                     # 分类损失权重
     dfl=1.5,                     # DFL 损失权重
     pose=12.0,                   # 关键点损失权重（关键点任务专用）
     kobj=1.0,                    # 关键点对象损失权重
