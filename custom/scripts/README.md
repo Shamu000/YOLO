@@ -50,3 +50,8 @@
 ```
 统计指定数据集下的所有文件夹里面的labels/train和labels/val里面的标签，并分别进行每个数据集类别总数和所有数据集类别总数汇总
 ```
+## compare_yolo_training_enhanced
+
+```
+传入多个csv画图比较结果，可以修改画什么图
+```
