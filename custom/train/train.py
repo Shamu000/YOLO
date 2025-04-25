@@ -17,7 +17,7 @@ model.train(
     workers=8,                      # DataLoader 使用的线程数
     pretrained=True,               # 是否加载预训练模型（True / 模型路径）
     optimizer='auto',              # 优化器类型（'SGD', 'Adam', 等）
-    cos_lr=False,                 # 是否使用余弦学习率调度器
+    cos_lr=True,                 # 是否使用余弦学习率调度器
     close_mosaic=10,              # 关闭 mosaic 增强的 epoch 数（后期 fine-tune）
     resume=False,                 # 是否从上一次训练断点继续训练
     fraction=1.0,                 # 使用数据集的比例
