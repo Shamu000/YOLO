@@ -53,5 +53,12 @@
 ## compare_yolo_training_enhanced
 
 ```
-传入多个csv画图比较结果，可以修改画什么图
+传入多个训练得到的csv画图比较结果，可以修改画什么图
 ```
+
+### find_labels
+
+```
+查找指定类别的标签名字
+```
+
