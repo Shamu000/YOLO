@@ -49,5 +49,5 @@ def check_and_remove_files(folder_path):
                 os.remove(file_path)
 
 # 使用函数
-folder_path = '/media/zjy/TOSHIBA EXT/330_RMUL_上午/labels'  # 你的文件夹路径
+folder_path = '/home/wyc/Yolo11/datasets/0422测试集拍摄2/labels/val'  # 你的文件夹路径
 check_and_remove_files(folder_path)
