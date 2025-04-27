@@ -17,7 +17,7 @@ model.train(
     workers=8,                      # DataLoader 使用的线程数
     pretrained=True,               # 是否加载预训练模型（True / 模型路径）
     optimizer='auto',              # 优化器类型（'SGD', 'Adam', 等）
-    cos_lr=True,                 # 是否使用余弦学习率调度器
+    cos_lr=False,                 # 是否使用余弦学习率调度器
     close_mosaic=10,              # 关闭 mosaic 增强的 epoch 数（后期 fine-tune）
     resume=False,                 # 是否从上一次训练断点继续训练
     fraction=1.0,                 # 使用数据集的比例
@@ -37,7 +37,7 @@ model.train(
     warmup_bias_lr=0.1,          # 预热阶段 bias 的学习率
 
     box=0.5,                     # 边界框损失权重
-    cls=10,                     # 分类损失权重
+    cls=7.5,                     # 分类损失权重
     dfl=1.5,                     # DFL 损失权重
     pose=12.0,                   # 关键点损失权重（关键点任务专用）
     kobj=1.0,                    # 关键点对象损失权重
@@ -52,7 +52,7 @@ model.train(
     shear=0.0,                   # 剪切增强（±角度）
     perspective=0.0,             # 透视变换增强（比例）
     flipud=0.0,                  # 上下翻转概率
-    fliplr=0.5,                  # 左右翻转概率
+    fliplr=0.0,                  # 左右翻转概率
     bgr=0.0,                     # BGR 通道变换概率
 
     mosaic=1.0,                  # mosaic 数据增强概率
