@@ -50,7 +50,7 @@ model.train(
     translate=0.1,               # 平移增强（±比例）
     scale=0.5,                   # 缩放增强（±比例）
     shear=0.0,                   # 剪切增强（±角度）
-    perspective=0.005,             # 透视变换增强（比例）
+    perspective=0.001,             # 透视变换增强（比例）
     flipud=0.0,                  # 上下翻转概率
     fliplr=0.0,                  # 左右翻转概率
     bgr=0.0,                     # BGR 通道变换概率
