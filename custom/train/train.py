@@ -44,8 +44,8 @@ model.train(
 
     nbs=64,                      # 标准 batch size（用于学习率调整）
     hsv_h=0.015,                 # HSV 色调增强
-    hsv_s=0.3,                   # HSV 饱和度增强
-    hsv_v=0.4,                   # HSV 亮度增强
+    hsv_s=0.7,                   # HSV 饱和度增强
+    hsv_v=0.6,                   # HSV 亮度增强
     degrees=0.0,                 # 图像旋转增强（±角度）
     translate=0.1,               # 平移增强（±比例）
     scale=0.5,                   # 缩放增强（±比例）
