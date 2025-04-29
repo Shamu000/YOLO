@@ -39,7 +39,7 @@ def plot_metrics(datasets, metrics, max_epoch=None):
             color = colors[idx % len(colors)]
             ax.plot(epochs, values, label=name, color=color)
         ax.set_title(metric, fontsize=12)
-        ax.set_xlabel("", fontsize=10)
+        ax.set_xlabel("Epoch", fontsize=10)
         ax.set_ylabel("Value", fontsize=10)
         ax.grid(True)
         ax.legend(fontsize=8)
@@ -56,18 +56,19 @@ def plot_metrics(datasets, metrics, max_epoch=None):
     plt.tight_layout()
     plt.show()
 
-if __name__ == "__main__":
-    # 在这里替换为你的实际 CSV 路径
-    csv_files = [
-        "/home/marshal_kim/下载/models/4.25.1/results.csv",
-        "/home/marshal_kim/下载/models/4.24.3/results.csv"
-    ]
-    metrics_to_plot = [
-        "train/box_loss", "train/pose_loss", "train/cls_loss",
-        "val/box_loss", "val/pose_loss", "val/cls_loss",
-        "metrics/mAP50(B)", "metrics/mAP50-95(B)",
-        "metrics/mAP50(P)", "metrics/mAP50-95(P)"
-    ]
+# 新增的全部可视化指标
+all_metrics_to_plot = [
+    "train/box_loss", "train/pose_loss",  "train/cls_loss",
+    "val/box_loss", "val/pose_loss",  "val/cls_loss",
+    "metrics/precision(B)", "metrics/recall(B)", "metrics/mAP50(B)", "metrics/mAP50-95(B)",
+    "metrics/precision(P)", "metrics/recall(P)", "metrics/mAP50(P)", "metrics/mAP50-95(P)"
+]
 
-    data = load_csvs(csv_files)
-    plot_metrics(data, metrics_to_plot)
+# 示例 CSV 路径（用户需要手动提供路径）
+csv_files = [
+    "/home/wyc/Yolo11/runs/pose/4.25.1/results.csv",
+    "/home/wyc/Yolo11/runs/pose/4.28.2/results.csv",
+]
+
+data = load_csvs(csv_files)
+plot_metrics(data, all_metrics_to_plot)
