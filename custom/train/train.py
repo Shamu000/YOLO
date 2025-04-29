@@ -46,7 +46,7 @@ model.train(
     hsv_h=0.015,                 # HSV 色调增强
     hsv_s=0.7,                   # HSV 饱和度增强
     hsv_v=0.4,                   # HSV 亮度增强
-    degrees=1.0,                 # 图像旋转增强（±角度）
+    degrees=0.0,                 # 图像旋转增强（±角度）
     translate=0.1,               # 平移增强（±比例）
     scale=0.5,                   # 缩放增强（±比例）
     shear=0.0,                   # 剪切增强（±角度）
@@ -60,7 +60,7 @@ model.train(
     copy_paste=0.0,              # segmentation copy-paste 增强概率
     copy_paste_mode='flip',      # copy_paste 增强方法（flip 或 mixup）
 
-    auto_augment='randaugment',  # 分类任务的自动增强策略
+    auto_augment='None',  # 分类任务的自动增强策略
     erasing=0.4                  # 分类任务随机擦除概率
 )
 
