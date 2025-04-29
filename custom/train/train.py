@@ -46,11 +46,11 @@ model.train(
     hsv_h=0.015,                 # HSV 色调增强
     hsv_s=0.7,                   # HSV 饱和度增强
     hsv_v=0.4,                   # HSV 亮度增强
-    degrees=0.0,                 # 图像旋转增强（±角度）
+    degrees=1.0,                 # 图像旋转增强（±角度）
     translate=0.1,               # 平移增强（±比例）
     scale=0.5,                   # 缩放增强（±比例）
     shear=0.0,                   # 剪切增强（±角度）
-    perspective=0.001,             # 透视变换增强（比例）
+    perspective=0.0,             # 透视变换增强（比例）
     flipud=0.0,                  # 上下翻转概率
     fliplr=0.0,                  # 左右翻转概率
     bgr=0.0,                     # BGR 通道变换概率
