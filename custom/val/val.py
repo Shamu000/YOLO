@@ -20,8 +20,10 @@ def evaluate_pose_per_class(model_path, data_yaml, imgsz=640, batch_size=32):
         batch=batch_size,
         imgsz=imgsz,
         verbose=False,
-        plots=False  # 关闭 Ultralytics 默认绘图
+        plots=True,  # ✅ 启用绘图
+        save=True  # ✅ 启用结果保存（txt、PR曲线、confusion matrix等）
     )
+
     names = model.names
     valid_indices = metrics.ap_class_index.tolist()  # 测试集中实际出现过的类别索引
 
@@ -45,7 +47,15 @@ if __name__ == "__main__":
     model_paths = [
         "/home/wyc/Yolo11/runs/pose/2.22.2/weights/best.pt",
         "/home/wyc/Yolo11/runs/pose/4.25.1/weights/best.pt",
-        "/home/wyc/Yolo11/runs/pose/4.25.2/weights/best.pt"
+        # "/home/wyc/Yolo11/runs/pose/4.25.2/weights/best.pt",
+        # "/home/wyc/Yolo11/runs/pose/4.27.2/weights/best.pt",
+        # "/home/wyc/Yolo11/runs/pose/4.28.1/weights/best.pt",
+        # "/home/wyc/Yolo11/runs/pose/4.28.2/weights/best.pt",
+        # "/home/wyc/Yolo11/runs/pose/4.28.3/weights/best.pt",
+        # "/home/wyc/Yolo11/runs/pose/4.29.1/weights/best.pt",
+        # "/home/wyc/Yolo11/runs/pose/4.29.2/weights/best.pt",
+        # "/home/wyc/Yolo11/runs/pose/4.29.3/weights/best.pt",
+        "/home/wyc/Yolo11/runs/pose/4.30/weights/best.pt",
     ]
     data_yaml = "custom/cfg/datasets.yaml"
     imgsz, batch_size = 640, 32
