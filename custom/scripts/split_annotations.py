@@ -11,7 +11,7 @@ os.makedirs(images_dir, exist_ok=True)
 os.makedirs(labels_dir, exist_ok=True)
 
 # 定义图片和文本的后缀
-image_extensions = {".jpg", ".jpeg", ".png", ".bmp", ".gif"}
+image_extensions = {".jpg", ".jpeg", ".png", ".bmp", ".gif",".JPEG",".PNG",".JPG"}
 txt_extension = ".txt"
 
 # 遍历文件夹并分类文件

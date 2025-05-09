@@ -21,7 +21,7 @@ def split_data(base_dir, split_ratio=0.8):
     ensure_directories_exist(base_dir)
 
     # 获取图片和标签
-    images = sorted([f for f in os.listdir(images_dir) if f.endswith((".png", ".jpg", ".jpeg"))])
+    images = sorted([f for f in os.listdir(images_dir) if f.endswith((".png", ".jpg", ".jpeg",".PNG",".JPEG",".JPG"))])
     labels = sorted([f for f in os.listdir(labels_dir) if f.endswith(".txt")])
 
     if len(images) != len(labels):

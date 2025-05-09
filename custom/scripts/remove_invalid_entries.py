@@ -8,7 +8,7 @@ def remove_unpaired_files(image_folder, label_folder):
     # 获取所有图片的基名（支持 .jpg 和 .png 格式，不区分大小写）
     image_bases = set()
     for f in image_files:
-        if f.lower().endswith('.jpg') or f.lower().endswith('.png'):
+        if f.lower().endswith('.jpg') or f.lower().endswith('.png') or f.lower().endswith('.jpeg') or f.lower().endswith('.PNG') or f.lower().endswith('.JPG') or f.lower().endswith('.JPEG'):
             base = os.path.splitext(f)[0]
             image_bases.add(base)
 
@@ -21,7 +21,7 @@ def remove_unpaired_files(image_folder, label_folder):
 
     # 删除未配对的图片文件（检查同时删除 .jpg 和 .png 文件）
     for base in unpaired_images:
-        for ext in ['.jpg', '.png']:
+        for ext in [".png", ".jpg", ".jpeg",".PNG",".JPEG",".JPG"]:
             image_path = os.path.join(image_folder, base + ext)
             if os.path.exists(image_path):
                 print(f"Removing unpaired image: {image_path}")
