@@ -67,9 +67,9 @@ def batch_extract_frames_multithread(input_dir, output_dir, interval=1, max_work
 
 if __name__ == "__main__":
     # === 配置部分 ===
-    input_dir = "/home/marshal_kim/下载/data-427/data"      # 视频目录
-    output_dir = "/home/marshal_kim/下载/data-427/images"    # 图片保存目录
+    input_dir = "/home/wyc/Downloads/0521武汉工程"      # 视频目录
+    output_dir = "/home/wyc/Downloads/0521武汉工程未标注"    # 图片保存目录
     interval = 5     # 每隔多少帧保存一张
-    max_workers = 8  # 线程数，建议 = CPU核心数 或 核心数x2
+    max_workers = 16  # 线程数，建议 = CPU核心数 或 核心数x2
 
     batch_extract_frames_multithread(input_dir, output_dir, interval, max_workers)
