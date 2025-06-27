@@ -48,7 +48,7 @@ def split_data(base_dir, split_ratio=0.8):
     print(f"数据已成功按 {split_ratio*100:.0f}% 训练集 / {100 - split_ratio*100:.0f}% 验证集 划分")
 
 # 设置数据集根目录
-base_dir = "/media/zjy/TOSHIBA EXT/330_RMUL_上午"  # 替换为你的数据集路径
+base_dir = "/home/wyc/Yolo11/datasets/省赛内录/0330省赛内录"  # 替换为你的数据集路径
 
 # 执行数据划分
 split_data(base_dir, split_ratio=0.8)
