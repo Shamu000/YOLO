@@ -14,14 +14,12 @@ train:
   - 区赛内录/0520适应性/images/train
   - 区赛内录/0521武汉工程1/images/train
   - 区赛内录/0521武汉工程2/images/train
-  - 区赛内录/0521武汉工程3/images/train
   - 区赛内录/0521武汉工程4/images/train
   - 区赛内录/0522南华/images/train
   - 区赛内录/0522成都大学/images/train
   - 区赛内录/0523合工宣/images/train
   - 区赛内录/0524上交1/images/train
   - 区赛内录/0524上交2/images/train
-  - 区赛内录/0524上交3/images/train
   - 区赛内录/0524上交4/images/train
   - 旧数据集/21上交区赛内录/images/train
   - 旧数据集/Labeled212/images/train
@@ -73,6 +71,8 @@ val:
 test:
   - HUARAY拍摄/0422测试集拍摄/images/train
   - HUARAY拍摄/0422测试集拍摄/images/val
+  - 区赛内录/0521武汉工程3/images/train
+  - 区赛内录/0524上交3/images/train
 
 
 kpt_shape: [4,2]
