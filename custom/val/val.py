@@ -45,8 +45,8 @@ def evaluate_pose_per_class(model_path, data_yaml, imgsz=640, batch_size=32):
 if __name__ == "__main__":
     # === 配置部分 ===
     model_paths = [
-        "/home/wyc/Yolo11/runs/pose/2.22.2/weights/best.pt",
-        "/home/wyc/Yolo11/runs/pose/4.25.1/weights/best.pt",
+        # "/home/wyc/Yolo11/runs/pose/2.22.2/weights/best.pt",
+        # "/home/wyc/Yolo11/runs/pose/4.25.1/weights/best.pt",
         # "/home/wyc/Yolo11/runs/pose/4.25.2/weights/best.pt",
         # "/home/wyc/Yolo11/runs/pose/4.27.2/weights/best.pt",
         # "/home/wyc/Yolo11/runs/pose/4.28.1/weights/best.pt",
@@ -56,6 +56,7 @@ if __name__ == "__main__":
         # "/home/wyc/Yolo11/runs/pose/4.29.2/weights/best.pt",
         # "/home/wyc/Yolo11/runs/pose/4.29.3/weights/best.pt",
         "/home/wyc/Yolo11/runs/pose/4.30/weights/best.pt",
+        "/home/wyc/Yolo11/runs/pose/6.27/weights/best.pt",
     ]
     data_yaml = "custom/cfg/datasets.yaml"
     imgsz, batch_size = 640, 32

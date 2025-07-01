@@ -8,7 +8,7 @@ model.train(
     # ------------------------ 训练任务配置 ------------------------
     task='pose',                     # 任务类型，关键点检测为 'pose'
     mode='train',                   # 模式，训练用 'train'
-    data='custom/cfg/datasets.yaml',# 数据配置文件路径
+    data='../cfg/datasets.yaml',    # 数据配置文件路径
     epochs=300,                     # 训练总轮数
     patience=30,                   # 早停等待轮数
     batch=-1,                       # 每批次图像数量，-1 表示自动调整
