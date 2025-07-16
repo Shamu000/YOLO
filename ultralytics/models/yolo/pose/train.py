@@ -62,6 +62,10 @@ class PoseTrainer(yolo.detect.DetectionTrainer):
         overrides["task"] = "pose"
         super().__init__(cfg, overrides, _callbacks)
 
+        self.loss_names = ['box_loss', 'pose_loss',
+                           'kobj_loss', 'cls_loss',
+                           'dfl_loss', 'dir_loss']  # 6 列，对齐张量长度
+
         if isinstance(self.args.device, str) and self.args.device.lower() == "mps":
             LOGGER.warning(
                 "WARNING ⚠️ Apple MPS known Pose bug. Recommend 'device=cpu' for Pose models. "
@@ -93,7 +97,7 @@ class PoseTrainer(yolo.detect.DetectionTrainer):
 
     def get_validator(self):
         """Returns an instance of the PoseValidator class for validation."""
-        self.loss_names = "box_loss", "pose_loss", "kobj_loss", "cls_loss", "dfl_loss"
+        self.loss_names = "box_loss", "pose_loss", "kobj_loss", "cls_loss", "dfl_loss","dir_loss"
         return yolo.pose.PoseValidator(
             self.test_loader, save_dir=self.save_dir, args=copy(self.args), _callbacks=self.callbacks
         )

@@ -506,10 +506,13 @@ class v8PoseLoss(v8DetectionLoss):
         nkpt = self.kpt_shape[0]  # number of keypoints
         sigmas = torch.from_numpy(OKS_SIGMA).to(self.device) if is_pose else torch.ones(nkpt, device=self.device) / nkpt
         self.keypoint_loss = KeypointLoss(sigmas=sigmas)
+        # 若想手动开关，也可以把下一行写成常量
+        self.use_dir_loss = (nkpt == 4)  # 仅四点目标时启用方向损失
+        self.lambda_dir = 0.3
 
     def __call__(self, preds, batch):
         """Calculate the total loss and detach it for pose estimation."""
-        loss = torch.zeros(5, device=self.device)  # box, cls, dfl, kpt_location, kpt_visibility
+        loss = torch.zeros(6, device=self.device)  # box, cls, dfl, kpt_location, kpt_visibility, dir_loss    (新增)
         feats, pred_kpts = preds if isinstance(preds[0], list) else preds[1]
         pred_distri, pred_scores = torch.cat([xi.view(feats[0].shape[0], self.no, -1) for xi in feats], 2).split(
             (self.reg_max * 4, self.nc), 1
@@ -564,7 +567,7 @@ class v8PoseLoss(v8DetectionLoss):
             keypoints[..., 0] *= imgsz[1]
             keypoints[..., 1] *= imgsz[0]
 
-            loss[1], loss[2] = self.calculate_keypoints_loss(
+            loss[1], loss[2] ,loss[5]= self.calculate_keypoints_loss(
                 fg_mask, target_gt_idx, keypoints, batch_idx, stride_tensor, target_bboxes, pred_kpts
             )
 
@@ -573,6 +576,7 @@ class v8PoseLoss(v8DetectionLoss):
         loss[2] *= self.hyp.kobj  # kobj gain
         loss[3] *= self.hyp.cls  # cls gain
         loss[4] *= self.hyp.dfl  # dfl gain
+        loss[5] *= self.lambda_dir # dir_loss
 
         return loss * batch_size, loss.detach()  # loss(box, cls, dfl)
 
@@ -638,18 +642,45 @@ class v8PoseLoss(v8DetectionLoss):
 
         kpts_loss = 0
         kpts_obj_loss = 0
+        dir_loss = torch.zeros(1, device=self.device)  # ← 默认 0，保证返回安全
 
         if masks.any():
             gt_kpt = selected_keypoints[masks]
             area = xyxy2xywh(target_bboxes[masks])[:, 2:].prod(1, keepdim=True)
             pred_kpt = pred_kpts[masks]
             kpt_mask = gt_kpt[..., 2] != 0 if gt_kpt.shape[-1] == 3 else torch.full_like(gt_kpt[..., 0], True)
+            # 1️⃣ 关键点位置 OKS 损失
             kpts_loss = self.keypoint_loss(pred_kpt, gt_kpt, kpt_mask, area)  # pose loss
 
+            if self.use_dir_loss and kpt_mask.shape[1] == 4:
+                pred_xy, gt_xy = pred_kpt[..., :2], gt_kpt[..., :2]
+                vL_pred, vL_gt = pred_xy[:, 1] - pred_xy[:, 0], gt_xy[:, 1] - gt_xy[:, 0]
+                vR_pred, vR_gt = pred_xy[:, 2] - pred_xy[:, 3], gt_xy[:, 2] - gt_xy[:, 3]
+
+                validL = (vL_gt.norm(dim=1) > 1e-6) & (vL_pred.norm(dim=1) > 1e-6)
+                validR = (vR_gt.norm(dim=1) > 1e-6) & (vR_pred.norm(dim=1) > 1e-6)
+                vL_pred, vL_gt = vL_pred[validL], vL_gt[validL]
+                vR_pred, vR_gt = vR_pred[validR], vR_gt[validR]
+
+                def cos_loss(a, b, eps=1e-8):
+                    a = a / (a.norm(dim=1, keepdim=True) + eps)
+                    b = b / (b.norm(dim=1, keepdim=True) + eps)
+                    cos_sim = (a * b).sum(dim=1).clamp(-1 + eps, 1 - eps)
+                    return 1.0 - cos_sim.abs()
+
+                comps = []
+                if vL_pred.numel():
+                    comps.append(cos_loss(vL_pred, vL_gt).mean())
+                if vR_pred.numel():
+                    comps.append(cos_loss(vR_pred, vR_gt).mean())
+                if comps:  # 至少有一条有效向量
+                    dir_loss = 0.5 * torch.stack(comps).mean()
+
+            # 3️⃣ 可见性 BCE
             if pred_kpt.shape[-1] == 3:
                 kpts_obj_loss = self.bce_pose(pred_kpt[..., 2], kpt_mask.float())  # keypoint obj loss
 
-        return kpts_loss, kpts_obj_loss
+        return kpts_loss, kpts_obj_loss, dir_loss.squeeze()
 
 
 class v8ClassificationLoss:
