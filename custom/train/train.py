@@ -2,7 +2,7 @@ import os
 from ultralytics import YOLO
 
 
-model = YOLO('yolov8n-pose.pt').to("cuda")
+model = YOLO('yolo12n-pose.yaml').to("cuda")
 
 model.train(
     # ------------------------ 训练任务配置 ------------------------
