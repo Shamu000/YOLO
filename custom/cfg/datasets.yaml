@@ -14,7 +14,6 @@ train:
   - HUARAY拍摄/0420基地拍摄/images/train
   - HUARAY拍摄/0420工程拍摄/images/train
   - HUARAY拍摄/0420蓝3拍摄/images/train
-  - HUARAY拍摄/0629靶车拍摄/images/train
   - 交流赛/0505吉大/images/train
   - 区赛内录/0520适应性/images/train
   - 区赛内录/0521武汉工程1/images/train
@@ -53,7 +52,6 @@ val:
   - HUARAY拍摄/0420基地拍摄/images/val
   - HUARAY拍摄/0420工程拍摄/images/val
   - HUARAY拍摄/0420蓝3拍摄/images/val
-  - HUARAY拍摄/0629靶车拍摄/images/val
   - 交流赛/0505吉大/images/val
   - 区赛内录/0520适应性/images/val
   - 区赛内录/0521武汉工程1/images/val
