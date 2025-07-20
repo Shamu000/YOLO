@@ -31,6 +31,7 @@ train:
   - 模拟赛内录/0321内录/images/train
   - 模拟赛内录/0323内录/images/train
   - 模拟赛内录/0427内录/images/train
+  - 模拟赛内录/0703模拟赛步3内录/images/train
   - 模拟赛内录/0703模拟赛步4内录/images/train
   - 模拟赛内录/0705模拟赛步3内录/images/train
   - 模拟赛内录/0705模拟赛步4内录1/images/train
@@ -69,6 +70,7 @@ val:
   - 模拟赛内录/0321内录/images/val
   - 模拟赛内录/0323内录/images/val
   - 模拟赛内录/0427内录/images/val
+  - 模拟赛内录/0703模拟赛步3内录/images/val
   - 模拟赛内录/0703模拟赛步4内录/images/val
   - 模拟赛内录/0705模拟赛步3内录/images/val
   - 模拟赛内录/0705模拟赛步4内录1/images/val

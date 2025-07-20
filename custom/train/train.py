@@ -1,8 +1,10 @@
+import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from ultralytics import YOLO
 
 
-model = YOLO('yolo12n-pose.yaml').to("cuda")
+model = YOLO('yolo11n-pose.pt').to("cuda")
 
 model.train(
     # ------------------------ 训练任务配置 ------------------------
