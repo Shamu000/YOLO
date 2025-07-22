@@ -64,7 +64,7 @@ class PoseTrainer(yolo.detect.DetectionTrainer):
 
         self.loss_names = ['box_loss', 'pose_loss',
                            'kobj_loss', 'cls_loss',
-                           'dfl_loss', 'dir_loss']  # 6 列，对齐张量长度
+                           'dfl_loss', 'dir_loss','geo_loss']  # 7 列，对齐张量长度
 
         if isinstance(self.args.device, str) and self.args.device.lower() == "mps":
             LOGGER.warning(
@@ -97,7 +97,7 @@ class PoseTrainer(yolo.detect.DetectionTrainer):
 
     def get_validator(self):
         """Returns an instance of the PoseValidator class for validation."""
-        self.loss_names = "box_loss", "pose_loss", "kobj_loss", "cls_loss", "dfl_loss","dir_loss"
+        self.loss_names = "box_loss", "pose_loss", "kobj_loss", "cls_loss", "dfl_loss", "dir_loss", "geo_loss"
         return yolo.pose.PoseValidator(
             self.test_loader, save_dir=self.save_dir, args=copy(self.args), _callbacks=self.callbacks
         )
