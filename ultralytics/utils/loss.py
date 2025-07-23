@@ -690,11 +690,13 @@ class v8PoseLoss(v8DetectionLoss):
                     lenR = (gt_xy[:, 2] - gt_xy[:, 3]).norm(dim=1) + 1e-6
                     k_sym = torch.minimum(lenR / lenL, lenL / lenR)  # (0,1]
 
-                    # --- 线性拉伸到 [0,1] ---
-                    k_min = self.k_min_geo
-                    k_lin = ((k_sym - k_min) / (1 - k_min + 1e-6)).clamp(0, 1)
-                    w_ang = k_lin                          # 正视→1
-                    w_pix = torch.sqrt(torch.clamp(1 - k_lin ** 2,min=0.0))     # 侧视→1
+                    # --- Sigmoid 拉伸到 (0,1)，避免硬截断 ---
+                    c = 0.90  # 转折中心：k_sym = c → w_ang = 0.5
+                    s = 20.0  # 坡度：15~25 常用，越大过渡越陡
+                    k_lin = torch.sigmoid((k_sym - c) * s)  # 平滑 S‑形
+
+                    w_ang = k_lin  # 正视权重 ↑
+                    w_pix = torch.sqrt(1.0 - k_lin.pow(2).clamp(0))  # 侧视权重 ↑
 
                     # ③ 逐边误差
                     idx_pairs = [(0, 1), (1, 2), (2, 3), (3, 0)]
