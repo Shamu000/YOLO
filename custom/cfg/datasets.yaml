@@ -15,7 +15,11 @@ train:
   - HUARAY拍摄/0420工程拍摄/images/train
   - HUARAY拍摄/0420蓝3拍摄/images/train
   - HUARAY拍摄/0717熄灭拍摄/images/train
+  - HUARAY拍摄/0722靶车拍摄/images/train
   - 交流赛/0505吉大/images/train
+  - 交流赛/0722哈深交流哨兵内录/images/train
+  - 交流赛/0722哈深交流步4内录/images/train
+  - 交流赛/0724哈威交流步3内录/images/train
   - 区赛内录/0520适应性/images/train
   - 区赛内录/0521武汉工程1/images/train
   - 区赛内录/0521武汉工程2/images/train
@@ -26,6 +30,8 @@ train:
   - 区赛内录/0524上交1/images/train
   - 区赛内录/0524上交2/images/train
   - 区赛内录/0524上交4/images/train
+  - 哈威交换/成电全向/images/train
+  - 哈威交换/成电平布/images/train
   - 旧数据集/21上交区赛内录/images/train
   - 旧数据集/Labeled212/images/train
   - 模拟赛内录/0314内录/images/train
@@ -63,7 +69,11 @@ val:
   - HUARAY拍摄/0420工程拍摄/images/val
   - HUARAY拍摄/0420蓝3拍摄/images/val
   - HUARAY拍摄/0717熄灭拍摄/images/val
+  - HUARAY拍摄/0722靶车拍摄/images/val
   - 交流赛/0505吉大/images/val
+  - 交流赛/0722哈深交流哨兵内录/images/val
+  - 交流赛/0722哈深交流步4内录/images/val
+  - 交流赛/0724哈威交流步3内录/images/val
   - 区赛内录/0520适应性/images/val
   - 区赛内录/0521武汉工程1/images/val
   - 区赛内录/0521武汉工程2/images/val
@@ -74,6 +84,8 @@ val:
   - 区赛内录/0524上交1/images/val
   - 区赛内录/0524上交2/images/val
   - 区赛内录/0524上交4/images/val
+  - 哈威交换/成电全向/images/val
+  - 哈威交换/成电平布/images/val
   - 旧数据集/21上交区赛内录/images/val
   - 旧数据集/Labeled212/images/val
   - 模拟赛内录/0314内录/images/val
