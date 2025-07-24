@@ -5,7 +5,6 @@ from ultralytics import YOLO
 
 
 model = YOLO('yolo11n-pose.pt').to("cuda")
-
 model.train(
     # ------------------------ 训练任务配置 ------------------------
     task='pose',                     # 任务类型，关键点检测为 'pose'
@@ -42,7 +41,7 @@ model.train(
     cls=7.5,                     # 分类损失权重
     dfl=1.5,                     # DFL 损失权重
     pose=12.0,                   # 关键点损失权重（关键点任务专用）
-    kobj=1.0,                    # 关键点对象损失权重
+    kobj=0.0,                    # 关键点对象损失权重
 
     nbs=64,                      # 标准 batch size（用于学习率调整）
     hsv_h=0.015,                 # HSV 色调增强
