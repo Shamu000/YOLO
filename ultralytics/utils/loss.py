@@ -509,7 +509,7 @@ class v8PoseLoss(v8DetectionLoss):
         # 若想手动开关，也可以把下一行写成常量
         self.use_dir_loss = (nkpt == 4)  # 仅四点目标时启用方向损失
         self.lambda_dir = 0.3
-        self.lambda_geo = 0.2
+        self.lambda_geo = 0.3
         self.k_min_geo = 0.85
 
     def __call__(self, preds, batch):
