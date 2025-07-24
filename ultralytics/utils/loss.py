@@ -508,9 +508,8 @@ class v8PoseLoss(v8DetectionLoss):
         self.keypoint_loss = KeypointLoss(sigmas=sigmas)
         # 若想手动开关，也可以把下一行写成常量
         self.use_dir_loss = (nkpt == 4)  # 仅四点目标时启用方向损失
-        self.lambda_dir = 0.3
-        self.lambda_geo = 0.3
-        self.k_min_geo = 0.85
+        self.lambda_dir = self.hyp.dir
+        self.lambda_geo = self.hyp.geo
 
     def __call__(self, preds, batch):
         """Calculate the total loss and detach it for pose estimation."""
