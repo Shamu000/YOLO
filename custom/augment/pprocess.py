@@ -26,43 +26,68 @@ def colorful_sp_noise(img, prob=0.001):
     return noisy
 
 # === 高亮运动模糊 ===
-def motion_blur_on_bright(img, direction='x', size=None, thresh=200):
-    """
-    仅对图像中高亮区域施加定向运动模糊（模拟灯条模糊）
+# def motion_blur_on_bright(img, direction='x', size=None, thresh=200):
+#     """
+#     仅对图像中高亮区域施加定向运动模糊（模拟灯条模糊）
     
-    :param img: 输入 BGR 图像 (H, W, 3)
-    :param direction: 'x' 或 'y' 方向
-    :param size: 模糊核大小，可为 None 随机选
-    :param thresh: 灰度亮度阈值，高于该值的区域将被模糊
-    :return: 加了局部模糊的图像
+#     :param img: 输入 BGR 图像 (H, W, 3)
+#     :param direction: 'x' 或 'y' 方向
+#     :param size: 模糊核大小，可为 None 随机选
+#     :param thresh: 灰度亮度阈值，高于该值的区域将被模糊
+#     :return: 加了局部模糊的图像
+#     """
+#     if size is None:
+#         size = random.choice([7, 15, 23])
+
+#     # 灰度图和高亮区域 mask 提取
+#     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+#     mask = (gray > thresh).astype(np.uint8) * 255  # 二值高亮区域
+
+#     # 方向性模糊核
+#     if direction == 'x':
+#         kernel = np.zeros((1, size))
+#         kernel[0, :] = 1
+#     elif direction == 'y':
+#         kernel = np.zeros((size, 1))
+#         kernel[:, 0] = 1
+#     else:
+#         raise ValueError("direction must be 'x' or 'y'")
+#     kernel /= size
+
+#     # 整图模糊结果（准备混合）
+#     blurred = cv2.filter2D(img, -1, kernel)
+
+#     # 扩展 mask 为 3 通道
+#     mask3 = cv2.merge([mask, mask, mask])
+
+#     # 将亮区域换成模糊结果
+#     result = np.where(mask3 == 255, blurred, img)
+#     return result
+
+# === xy运动模糊 ===
+def motion_blur(img, direction='x', size=None):
+    """
+    对整张图像施加 X 或 Y 方向运动模糊
+
+    :param img: 输入图像 (H, W, 3)
+    :param direction: 模糊方向，'x' 或 'y'
+    :param size: 模糊核大小,None 表示随机选择
+    :return: 模糊图像
     """
     if size is None:
         size = random.choice([7, 15, 23])
 
-    # 灰度图和高亮区域 mask 提取
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    mask = (gray > thresh).astype(np.uint8) * 255  # 二值高亮区域
-
-    # 方向性模糊核
     if direction == 'x':
-        kernel = np.zeros((1, size))
+        kernel = np.zeros((1, size), dtype=np.float32)
         kernel[0, :] = 1
     elif direction == 'y':
-        kernel = np.zeros((size, 1))
+        kernel = np.zeros((size, 1), dtype=np.float32)
         kernel[:, 0] = 1
     else:
         raise ValueError("direction must be 'x' or 'y'")
-    kernel /= size
 
-    # 整图模糊结果（准备混合）
-    blurred = cv2.filter2D(img, -1, kernel)
-
-    # 扩展 mask 为 3 通道
-    mask3 = cv2.merge([mask, mask, mask])
-
-    # 将亮区域换成模糊结果
-    result = np.where(mask3 == 255, blurred, img)
-    return result
+    kernel /= size  # 归一化核
+    return cv2.filter2D(img, -1, kernel)
 
 # === 随机遮挡（Cutout） ===
 def random_cutout(img, num_holes=1, size_range=(20, 40)):
@@ -104,8 +129,8 @@ def process(data):
         img = colorful_sp_noise(img, prob=0.001)
 
     if random.random() < 0.5:
-        direction = random.choices(['x', 'y'], weights=[0.3, 0.7], k=1)[0]
-        img = motion_blur_on_bright(img, direction=direction, size=None, thresh=200)
+        direction = random.choices(['x', 'y'], weights=[0.4, 0.6])[0]
+        img = motion_blur(img, direction=direction)
 
     # 遮挡块增强
     if random.random() < 0.3:  # 30% 概率加入遮挡
