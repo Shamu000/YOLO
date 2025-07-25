@@ -783,7 +783,7 @@ class Metric(SimpleClass):
 
     def fitness(self):
         """Return model fitness as a weighted combination of metrics."""
-        w = [0.0, 0.0, 0.1, 0.9]  # weights for [P, R, mAP@0.5, mAP@0.5:0.95]
+        w = [0.05, 0.0, 0.05, 0.9]  # weights for [P, R, mAP@0.5, mAP@0.5:0.95]
         return (np.array(self.mean_results()) * w).sum()
 
     def update(self, results):
@@ -1175,7 +1175,7 @@ class PoseMetrics(SegmentMetrics):
     @property
     def fitness(self):
         """Return combined fitness score for pose and box detection."""
-        return self.pose.fitness() + self.box.fitness()
+        return self.pose.fitness() + 0.2 * self.box.fitness()
 
     @property
     def curves(self):
