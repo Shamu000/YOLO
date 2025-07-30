@@ -17,7 +17,7 @@ train:
   - HUARAY拍摄/0717熄灭拍摄/images/train
   - HUARAY拍摄/0722靶车拍摄/images/train
   - HUARAY拍摄/0727哨兵建图拍摄/images/train
-  - HUARAY拍摄/0728适应性拍摄1/images/train
+#  - HUARAY拍摄/0728适应性拍摄1/images/train
   - HUARAY拍摄/0728适应性拍摄2/images/train
   - 交流赛/0505吉大/images/train
   - 交流赛/0722哈深交流哨兵内录/images/train
@@ -36,6 +36,15 @@ train:
   - 哈威交换/成电全向/images/train
   - 哈威交换/成电平布/images/train
   - 国赛内录/0727哨兵建图内录/images/train
+  - 国赛内录/0729五邑哨兵内录/images/train
+  - 国赛内录/0729五邑步3内录/images/train
+  - 国赛内录/0729五邑步4内录/images/train
+  - 国赛内录/0729西交哨兵内录/images/train
+  - 国赛内录/0729西交平步内录/images/train
+  - 国赛内录/0729西交步3内录/images/train
+  - 国赛内录/0730东大哨兵内录/images/train
+  - 国赛内录/0730东大平步内录/images/train
+  - 国赛内录/0730东大步3内录/images/train
   - 旧数据集/21上交区赛内录/images/train
   - 旧数据集/Labeled212/images/train
   - 模拟赛内录/0314内录/images/train
@@ -75,7 +84,7 @@ val:
   - HUARAY拍摄/0717熄灭拍摄/images/val
   - HUARAY拍摄/0722靶车拍摄/images/val
   - HUARAY拍摄/0727哨兵建图拍摄/images/val
-  - HUARAY拍摄/0728适应性拍摄1/images/val
+#  - HUARAY拍摄/0728适应性拍摄1/images/val
   - HUARAY拍摄/0728适应性拍摄2/images/val
   - 交流赛/0505吉大/images/val
   - 交流赛/0722哈深交流哨兵内录/images/val
@@ -94,6 +103,15 @@ val:
   - 哈威交换/成电全向/images/val
   - 哈威交换/成电平布/images/val
   - 国赛内录/0727哨兵建图内录/images/val
+  - 国赛内录/0729五邑哨兵内录/images/val
+  - 国赛内录/0729五邑步3内录/images/val
+  - 国赛内录/0729五邑步4内录/images/val
+  - 国赛内录/0729西交哨兵内录/images/val
+  - 国赛内录/0729西交平步内录/images/val
+  - 国赛内录/0729西交步3内录/images/val
+  - 国赛内录/0730东大哨兵内录/images/val
+  - 国赛内录/0730东大平步内录/images/val
+  - 国赛内录/0730东大步3内录/images/val
   - 旧数据集/21上交区赛内录/images/val
   - 旧数据集/Labeled212/images/val
   - 模拟赛内录/0314内录/images/val
