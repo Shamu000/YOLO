@@ -17,8 +17,10 @@ train:
   - HUARAY拍摄/0717熄灭拍摄/images/train
   - HUARAY拍摄/0722靶车拍摄/images/train
   - HUARAY拍摄/0727哨兵建图拍摄/images/train
-#  - HUARAY拍摄/0728适应性拍摄1/images/train
+  - HUARAY拍摄/0728适应性拍摄1/images/train
   - HUARAY拍摄/0728适应性拍摄2/images/train
+  - HUARAY拍摄/0728适应性拍摄3/images/train
+  - HUARAY拍摄/0728适应性拍摄4/images/train
   - HUARAY拍摄/0801前哨站拍摄/images/train
   - 交流赛/0505吉大/images/train
   - 交流赛/0722哈深交流哨兵内录/images/train
@@ -85,8 +87,10 @@ val:
   - HUARAY拍摄/0717熄灭拍摄/images/val
   - HUARAY拍摄/0722靶车拍摄/images/val
   - HUARAY拍摄/0727哨兵建图拍摄/images/val
-#  - HUARAY拍摄/0728适应性拍摄1/images/val
+  - HUARAY拍摄/0728适应性拍摄1/images/val
   - HUARAY拍摄/0728适应性拍摄2/images/val
+  - HUARAY拍摄/0728适应性拍摄3/images/val
+  - HUARAY拍摄/0728适应性拍摄4/images/val
   - HUARAY拍摄/0801前哨站拍摄/images/val
   - 交流赛/0505吉大/images/val
   - 交流赛/0722哈深交流哨兵内录/images/val
