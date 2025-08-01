@@ -45,9 +45,16 @@ train:
   - 国赛内录/0729西交哨兵内录/images/train
   - 国赛内录/0729西交平步内录/images/train
   - 国赛内录/0729西交步3内录/images/train
+  - 国赛内录/0729西交步4内录/images/train
   - 国赛内录/0730东大哨兵内录/images/train
   - 国赛内录/0730东大平步内录/images/train
   - 国赛内录/0730东大步3内录/images/train
+  - 国赛内录/0731西交哨兵内录/images/train
+  - 国赛内录/0731西交步3内录/images/train
+  - 国赛内录/0731西交步4内录/images/train
+  - 国赛内录/0801浙大哨兵内录/images/train
+  - 国赛内录/0801浙大平步内录/images/train
+  - 国赛内录/0801浙大步3内录/images/train
   - 旧数据集/21上交区赛内录/images/train
   - 旧数据集/Labeled212/images/train
   - 模拟赛内录/0314内录/images/train
@@ -115,9 +122,16 @@ val:
   - 国赛内录/0729西交哨兵内录/images/val
   - 国赛内录/0729西交平步内录/images/val
   - 国赛内录/0729西交步3内录/images/val
+  - 国赛内录/0729西交步4内录/images/val
   - 国赛内录/0730东大哨兵内录/images/val
   - 国赛内录/0730东大平步内录/images/val
   - 国赛内录/0730东大步3内录/images/val
+  - 国赛内录/0731西交哨兵内录/images/val
+  - 国赛内录/0731西交步3内录/images/val
+  - 国赛内录/0731西交步4内录/images/val
+  - 国赛内录/0801浙大哨兵内录/images/val
+  - 国赛内录/0801浙大平步内录/images/val
+  - 国赛内录/0801浙大步3内录/images/val
   - 旧数据集/21上交区赛内录/images/val
   - 旧数据集/Labeled212/images/val
   - 模拟赛内录/0314内录/images/val
