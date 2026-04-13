@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')
 from ultralytics import YOLO
 
 
-model = YOLO('yolo11n-pose.pt').to("cuda")
+model = YOLO('/home/hithcat/Code/tools/models/yolo11n-pose.pt').to("cuda")
 model.train(
     # ------------------------ 训练任务配置 ------------------------
     task='pose',                     # 任务类型，关键点检测为 'pose'

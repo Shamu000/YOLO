@@ -2,7 +2,7 @@ import os
 import shutil
 
 # 设置文件夹路径
-source_dir = "/home/wyc/Yolo11/datasets/省赛内录/0330省赛内录"  # 数据集文件夹路径
+source_dir = "/home/hithcat/Code/CRT/测试集/标注"  # 数据集文件夹路径
 images_dir = os.path.join(source_dir, "images")
 labels_dir = os.path.join(source_dir, "labels")
 

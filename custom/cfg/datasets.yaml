@@ -1,193 +1,22 @@
-path: /home/wyc/Yolo11/datasets
+path: /home/hithcat/Code/CRT/yolo/datasets
 
 train:
-  - HIK拍摄/0628HIK拍摄1/images/train
-  - HIK拍摄/0628HIK拍摄2/images/train
-  - HIK拍摄/0628HIK拍摄4/images/train
-  - HIK拍摄/0628HIK拍摄5/images/train
-  - HUARAY拍摄/0112哨兵拍摄/images/train
-  - HUARAY拍摄/0115旋转装甲板拍摄/images/train
-  - HUARAY拍摄/0210英雄工程拍摄/images/train
-  - HUARAY拍摄/0216拍摄/images/train
-  - HUARAY拍摄/0314场边拍摄/images/train
-  - HUARAY拍摄/0416前哨站/images/train
-  - HUARAY拍摄/0420基地拍摄/images/train
-  - HUARAY拍摄/0420工程拍摄/images/train
-  - HUARAY拍摄/0420蓝3拍摄/images/train
-  - HUARAY拍摄/0717熄灭拍摄/images/train
-  - HUARAY拍摄/0722靶车拍摄/images/train
-  - HUARAY拍摄/0727哨兵建图拍摄/images/train
-  - HUARAY拍摄/0728适应性拍摄1/images/train
-  - HUARAY拍摄/0728适应性拍摄2/images/train
-  - HUARAY拍摄/0728适应性拍摄3/images/train
-  - HUARAY拍摄/0728适应性拍摄4/images/train
-  - HUARAY拍摄/0801前哨站拍摄/images/train
-  - 交流赛/0505吉大/images/train
-  - 交流赛/0722哈深交流哨兵内录/images/train
-  - 交流赛/0722哈深交流步4内录/images/train
-  - 交流赛/0724哈威交流步3内录/images/train
-  - 区赛内录/0520适应性/images/train
-  - 区赛内录/0521武汉工程1/images/train
-  - 区赛内录/0521武汉工程2/images/train
-  - 区赛内录/0521武汉工程4/images/train
-  - 区赛内录/0522南华/images/train
-  - 区赛内录/0522成都大学/images/train
-  - 区赛内录/0523合工宣/images/train
-  - 区赛内录/0524上交1/images/train
-  - 区赛内录/0524上交2/images/train
-  - 区赛内录/0524上交4/images/train
-  - 哈威交换/成电全向/images/train
-  - 哈威交换/成电平布/images/train
-  - 国赛内录/0727哨兵建图内录/images/train
-  - 国赛内录/0729五邑哨兵内录/images/train
-  - 国赛内录/0729五邑步3内录/images/train
-  - 国赛内录/0729五邑步4内录/images/train
-  - 国赛内录/0729西交哨兵内录/images/train
-  - 国赛内录/0729西交平步内录/images/train
-  - 国赛内录/0729西交步3内录/images/train
-  - 国赛内录/0729西交步4内录/images/train
-  - 国赛内录/0730东大哨兵内录/images/train
-  - 国赛内录/0730东大平步内录/images/train
-  - 国赛内录/0730东大步3内录/images/train
-  - 国赛内录/0731西交哨兵内录/images/train
-  - 国赛内录/0731西交步3内录/images/train
-  - 国赛内录/0731西交步4内录/images/train
-  - 国赛内录/0801浙大哨兵内录/images/train
-  - 国赛内录/0801浙大平步内录/images/train
-  - 国赛内录/0801浙大步3内录/images/train
-  - 旧数据集/21上交区赛内录/images/train
-  - 旧数据集/Labeled212/images/train
-  - 模拟赛内录/0314内录/images/train
-  - 模拟赛内录/0321内录/images/train
-  - 模拟赛内录/0323内录/images/train
-  - 模拟赛内录/0427内录/images/train
-  - 模拟赛内录/0703模拟赛步3内录/images/train
-  - 模拟赛内录/0703模拟赛步4内录/images/train
-  - 模拟赛内录/0705模拟赛步3内录/images/train
-  - 模拟赛内录/0705模拟赛步4内录1/images/train
-  - 模拟赛内录/0705模拟赛步4内录2/images/train
-  - 模拟赛内录/0707模拟赛步3内录/images/train
-  - 模拟赛内录/0707模拟赛步4内录/images/train
-  - 模拟赛内录/0709模拟赛步3内录/images/train
-  - 模拟赛内录/0709模拟赛步4内录/images/train
-  - 模拟赛内录/0711模拟赛步3内录/images/train
-  - 模拟赛内录/0711模拟赛步4内录/images/train
-  - 模拟赛内录/0713模拟赛平步内录/images/train
-  - 模拟赛内录/0715模拟赛内录/images/train
-  - 省赛内录/0329省赛内录/images/train
-  - 省赛内录/0330省赛内录/images/train
+  - /home/hithcat/Code/CRT/测试集/标注/images/train
 
 val:
-  - HIK拍摄/0628HIK拍摄1/images/val
-  - HIK拍摄/0628HIK拍摄2/images/val
-  - HIK拍摄/0628HIK拍摄4/images/val
-  - HIK拍摄/0628HIK拍摄5/images/val
-  - HUARAY拍摄/0112哨兵拍摄/images/val
-  - HUARAY拍摄/0115旋转装甲板拍摄/images/val
-  - HUARAY拍摄/0210英雄工程拍摄/images/val
-  - HUARAY拍摄/0216拍摄/images/val
-  - HUARAY拍摄/0314场边拍摄/images/val
-  - HUARAY拍摄/0416前哨站/images/val
-  - HUARAY拍摄/0420基地拍摄/images/val
-  - HUARAY拍摄/0420工程拍摄/images/val
-  - HUARAY拍摄/0420蓝3拍摄/images/val
-  - HUARAY拍摄/0717熄灭拍摄/images/val
-  - HUARAY拍摄/0722靶车拍摄/images/val
-  - HUARAY拍摄/0727哨兵建图拍摄/images/val
-  - HUARAY拍摄/0728适应性拍摄1/images/val
-  - HUARAY拍摄/0728适应性拍摄2/images/val
-  - HUARAY拍摄/0728适应性拍摄3/images/val
-  - HUARAY拍摄/0728适应性拍摄4/images/val
-  - HUARAY拍摄/0801前哨站拍摄/images/val
-  - 交流赛/0505吉大/images/val
-  - 交流赛/0722哈深交流哨兵内录/images/val
-  - 交流赛/0722哈深交流步4内录/images/val
-  - 交流赛/0724哈威交流步3内录/images/val
-  - 区赛内录/0520适应性/images/val
-  - 区赛内录/0521武汉工程1/images/val
-  - 区赛内录/0521武汉工程2/images/val
-  - 区赛内录/0521武汉工程4/images/val
-  - 区赛内录/0522南华/images/val
-  - 区赛内录/0522成都大学/images/val
-  - 区赛内录/0523合工宣/images/val
-  - 区赛内录/0524上交1/images/val
-  - 区赛内录/0524上交2/images/val
-  - 区赛内录/0524上交4/images/val
-  - 哈威交换/成电全向/images/val
-  - 哈威交换/成电平布/images/val
-  - 国赛内录/0727哨兵建图内录/images/val
-  - 国赛内录/0729五邑哨兵内录/images/val
-  - 国赛内录/0729五邑步3内录/images/val
-  - 国赛内录/0729五邑步4内录/images/val
-  - 国赛内录/0729西交哨兵内录/images/val
-  - 国赛内录/0729西交平步内录/images/val
-  - 国赛内录/0729西交步3内录/images/val
-  - 国赛内录/0729西交步4内录/images/val
-  - 国赛内录/0730东大哨兵内录/images/val
-  - 国赛内录/0730东大平步内录/images/val
-  - 国赛内录/0730东大步3内录/images/val
-  - 国赛内录/0731西交哨兵内录/images/val
-  - 国赛内录/0731西交步3内录/images/val
-  - 国赛内录/0731西交步4内录/images/val
-  - 国赛内录/0801浙大哨兵内录/images/val
-  - 国赛内录/0801浙大平步内录/images/val
-  - 国赛内录/0801浙大步3内录/images/val
-  - 旧数据集/21上交区赛内录/images/val
-  - 旧数据集/Labeled212/images/val
-  - 模拟赛内录/0314内录/images/val
-  - 模拟赛内录/0321内录/images/val
-  - 模拟赛内录/0323内录/images/val
-  - 模拟赛内录/0427内录/images/val
-  - 模拟赛内录/0703模拟赛步3内录/images/val
-  - 模拟赛内录/0703模拟赛步4内录/images/val
-  - 模拟赛内录/0705模拟赛步3内录/images/val
-  - 模拟赛内录/0705模拟赛步4内录1/images/val
-  - 模拟赛内录/0705模拟赛步4内录2/images/val
-  - 模拟赛内录/0707模拟赛步3内录/images/val
-  - 模拟赛内录/0707模拟赛步3内录/images/val
-  - 模拟赛内录/0709模拟赛步3内录/images/val
-  - 模拟赛内录/0709模拟赛步4内录/images/val
-  - 模拟赛内录/0711模拟赛步3内录/images/val
-  - 模拟赛内录/0711模拟赛步4内录/images/val
-  - 模拟赛内录/0713模拟赛平步内录/images/val
-  - 模拟赛内录/0715模拟赛内录/images/val
-  - 省赛内录/0329省赛内录/images/val
-  - 省赛内录/0330省赛内录/images/val
+  - /home/hithcat/Code/CRT/测试集/标注/images/val
 
 test:
-  - 区赛内录/0521武汉工程3/images/train
-  - 区赛内录/0521武汉工程3/images/val
-  - 区赛内录/0524上交3/images/train
-  - 区赛内录/0524上交3/images/val
+  - /home/hithcat/Code/CRT/测试集/测试/images/val
 
-kpt_shape: [4,2]
+kpt_shape: [6,2]
+
+# kpt的第三个参数0表示不可见，1表示存在但不可见，2表示存在且可见
 
 names:
-  0: 'Blue Sentinel'
-  1: 'Blue Hero 1'
-  2: 'Blue Engineer 2'
-  3: 'Blue Unit 3'
-  4: 'Blue Unit 4'
-  5: 'Blue Unit 5'
-  6: 'Blue Outpost'
-  7: 'Blue Small Base'
-  8: 'Blue Large Base'
-  9: 'Red Sentinel'
-  10: 'Red Hero 1'
-  11: 'Red Engineer 2'
-  12: 'Red Unit 3'
-  13: 'Red Unit 4'
-  14: 'Red Unit 5'
-  15: 'Red Outpost'
-  16: 'Red Small Base'
-  17: 'Red Large Base'
-  18: 'Off Sentinel'
-  19: 'Off Hero 1'
-  20: 'Off Engineer 2'
-  21: 'Off Unit 3'
-  22: 'Off Unit 4'
-  23: 'Off Unit 5'
-  24: 'Off Outpost'
-  25: 'Off Base'
-  26: 'Off Base Armor'
+  0: 'Red_Target_Light'
+  1: 'Red_Target_Off'
+  2: 'Blue_Target_Light'
+  3: 'Blue_Target_Off'
+
 
