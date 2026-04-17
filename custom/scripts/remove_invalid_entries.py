@@ -35,6 +35,6 @@ def remove_unpaired_files(image_folder, label_folder):
             os.remove(txt_path)
 
 # 使用示例
-image_folder = '/home/wyc/Yolo11/datasets/省赛内录/0330省赛内录/images'
-label_folder = '/home/wyc/Yolo11/datasets/省赛内录/0330省赛内录/labels'
+image_folder = '/home/hithcat/Code/CRT/TraditionalLabel/frames'
+label_folder = '/home/hithcat/Code/CRT/TraditionalLabel/frames'
 remove_unpaired_files(image_folder, label_folder)

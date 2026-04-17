@@ -10,8 +10,8 @@ model.train(
     task='pose',                     # 任务类型，关键点检测为 'pose'
     mode='train',                   # 模式，训练用 'train'
     data='custom/cfg/datasets.yaml',    # 数据配置文件路径
-    epochs=60,                     # 训练总轮数
-    patience=10,                   # 早停等待轮数
+    epochs=200,                     # 训练总轮数
+    patience=20,                   # 早停等待轮数
     batch=-1,                       # 每批次图像数量，-1 表示自动调整
     imgsz=640,                      # 输入图像尺寸（可设为 int 或 list）
     device='0',                     # 指定训练设备（如 'cpu', '0', '0,1'）

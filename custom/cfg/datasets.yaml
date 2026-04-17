@@ -1,16 +1,17 @@
-path: /home/hithcat/Code/CRT/yolo/datasets
+path: /home/hithcat/Code/CRT/TraditionalLabel/frames
 
 train:
-  - /home/hithcat/Code/CRT/测试集/标注/images/train
+  - /home/hithcat/Code/CRT/TraditionalLabel/frames/images/train
 
 val:
-  - /home/hithcat/Code/CRT/测试集/标注/images/val
+  - /home/hithcat/Code/CRT/TraditionalLabel/frames/images/val
 
 test:
-  - /home/hithcat/Code/CRT/测试集/测试/images/val
+  - /home/hithcat/Code/CRT/TraditionalLabel/frames/images/val
 
 kpt_shape: [6,2]
 
+# 0：R，1：上，2：左，3：右，4：圆靶中心，5：下
 # kpt的第三个参数0表示不可见，1表示存在但不可见，2表示存在且可见
 
 names:

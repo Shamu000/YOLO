@@ -1,3 +1,9 @@
+### 完整流程
+extract_frames
+remove_invalid_entries
+split_annotations
+split_dataset
+
 ###  split_annotations
 
 ```
