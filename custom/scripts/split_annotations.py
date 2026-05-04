@@ -2,7 +2,7 @@ import os
 import shutil
 
 # 设置文件夹路径
-source_dir = "/home/hithcat/Code/CRT/TraditionalLabel/frames"  # 数据集文件夹路径
+source_dir = "/home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/5.2"  # 数据集文件夹路径
 images_dir = os.path.join(source_dir, "images")
 labels_dir = os.path.join(source_dir, "labels")
 

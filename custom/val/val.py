@@ -20,8 +20,8 @@ def evaluate_pose_per_class(model_path, data_yaml, imgsz=640, batch_size=32):
         batch=batch_size,
         imgsz=imgsz,
         verbose=False,
-        plots=True,  # ✅ 启用绘图
-        save=True  # ✅ 启用结果保存（txt、PR曲线、confusion matrix等）
+        plots=True,  # 启用绘图
+        save=True  # 启用结果保存（txt、PR曲线、confusion matrix等）
     )
 
     names = model.names

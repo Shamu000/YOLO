@@ -5,8 +5,10 @@ import pandas as pd
 
 # 你的短标签映射表
 category_mapping = {
-    0: "R",
-    1: "B"
+    0: "Red_Target_Light",
+    1: "Red_Target_Off",
+    2: "Blue_Target_Light",
+    3: "Blue_Target_Off"
 }
 
 def evaluate_pose_per_class(model_path, data_yaml, imgsz=640, batch_size=32):
@@ -16,9 +18,13 @@ def evaluate_pose_per_class(model_path, data_yaml, imgsz=640, batch_size=32):
         split="test",
         batch=batch_size,
         imgsz=imgsz,
+        conf=0.6,
+        iou=0.55,
+        max_det=200,
+        agnostic_nms=True,
         verbose=False,
-        plots=True,  # ✅ 启用绘图
-        save=True  # ✅ 启用结果保存（txt、PR曲线、confusion matrix等）
+        plots=True,  # 启用绘图
+        save=True  # 启用结果保存（txt、PR曲线、confusion matrix等）
     )
 
     names = model.names

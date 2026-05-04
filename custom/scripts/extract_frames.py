@@ -77,11 +77,11 @@ def batch_extract_frames_multithread(input_dir, output_dir, interval=1, max_work
 
 if __name__ == "__main__":
     # === 配置部分 ===
-    input_dir = "/home/hithcat/Code/CRT/TraditionalLabel/videos"      # 视频目录
-    output_dir = "/home/hithcat/Code/CRT/TraditionalLabel/frames"    # 图片保存目录
-    interval = 5     # 每隔多少帧保存一张
-    max_workers = 16  # 线程数，建议 = CPU核心数 或 核心数x2
-    start_frame = 3130   # 从视频的第几帧开始提取
-    end_frame = 3335     # 提取到视频的第几帧结束，0表示提取到结尾
+    input_dir = "/home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/2"      # 视频目录
+    output_dir = "/home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/2"    # 图片保存目录
+    interval = 10     # 每隔多少帧保存一张
+    max_workers = 28  # 线程数，建议 = CPU核心数 或 核心数x2
+    start_frame = 0   # 从视频的第几帧开始提取
+    end_frame = 0     # 提取到视频的第几帧结束，0表示提取到结尾
 
     batch_extract_frames_multithread(input_dir, output_dir, interval, max_workers, start_frame, end_frame)

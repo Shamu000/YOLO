@@ -1,18 +1,18 @@
-path: /home/hithcat/Code/CRT/TraditionalLabel/frames
+path: /home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/5.2
 
 train:
-  - /home/hithcat/Code/CRT/TraditionalLabel/frames/images/train
+  - /home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/5.2/images/train
 
 val:
-  - /home/hithcat/Code/CRT/TraditionalLabel/frames/images/val
+  - /home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/5.2/images/val
 
 test:
-  - /home/hithcat/Code/CRT/TraditionalLabel/frames/images/val
+  - /home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/test/4
 
 kpt_shape: [6,2]
 
+# 0: R, 1: 圆靶中心, 2: 上, 3: 左, 4: 下, 5: 右
 # 0：R，1：上，2：左，3：右，4：圆靶中心，5：下
-# kpt的第三个参数0表示不可见，1表示存在但不可见，2表示存在且可见
 
 names:
   0: 'Red_Target_Light'

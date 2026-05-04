@@ -1,4 +1,5 @@
 ### 完整流程
+## 1.训练
 extract_frames
 remove_invalid_entries
 split_annotations
