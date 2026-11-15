@@ -30,7 +30,7 @@ def move_and_merge_flat(src_img_dir, src_lbl_dir, dst_dir):
 
 def main():
     # ✅ 在这里指定你的数据集根目录
-    dataset_root = "/home/hithcat/Code/CRT/TraditionalLabel/frames/temp"  # TODO: 替换为你的路径，例如 "/home/user/dataset"
+    dataset_root = "/home/hithcat/Code/CRT/TraditionalLabel/datas/home1_4Unityv1_qusai"  # TODO: 替换为你的路径，例如 "/home/user/dataset"
 
     dst_dir = dataset_root  # 混合后文件统一放在这个目录中
 

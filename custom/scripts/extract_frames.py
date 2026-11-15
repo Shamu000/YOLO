@@ -20,36 +20,46 @@ def extract_frames_single_video(video_path, output_dir, interval=1, start_idx=0,
         return 0
 
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    end_frame = end_frame if end_frame > 0 else total_frames
+    if total_frames <= 0:
+        cap.release()
+        return 0
+
+    last_frame = total_frames - 1
+    end_frame = min(end_frame if end_frame > 0 else last_frame, last_frame)
     # clamp start_frame 到有效范围并从该帧开始读取
-    start_frame = max(0, min(start_frame, total_frames))
-    frame_count = start_frame
+    start_frame = max(0, min(start_frame, last_frame))
+    if interval <= 0:
+        interval = 1
+
+    frame_count = ((start_frame + interval - 1) // interval) * interval
     saved_count = 0
 
-    # 将视频读取位置跳到 start_frame
-    cap.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+    # 先跳到第一个需要保存的帧，后续每次直接定位到下一个目标帧
+    cap.set(cv2.CAP_PROP_POS_FRAMES, frame_count)
 
-    # 进度条总量按实际要读取的帧数计算
-    pbar_total = max(0, end_frame - start_frame + 1)
-    pbar = tqdm(total=pbar_total, unit="frame", desc=f"切帧 {os.path.basename(video_path)}", position=start_idx)
+    # 进度条按实际要保存的帧数计算
+    pbar_total = 0 if frame_count > end_frame else ((end_frame - frame_count) // interval) + 1
+    pbar = tqdm(total=pbar_total, unit="shot", desc=f"切帧 {os.path.basename(video_path)}", position=start_idx)
 
     while frame_count <= end_frame:
         ret, frame = cap.read()
         if not ret:
             break
 
-        if frame_count % interval == 0 and start_frame <= frame_count <= end_frame:
-            img_name = f"{os.path.splitext(os.path.basename(video_path))[0]}_frame_{frame_count:06d}.png"
-            img_path = os.path.join(output_dir, img_name)
-            cv2.imwrite(img_path, frame)
-            saved_count += 1
+        img_name = f"{os.path.splitext(os.path.basename(video_path))[0]}_frame_{frame_count:06d}.png"
+        img_path = os.path.join(output_dir, img_name)
+        cv2.imwrite(img_path, frame)
+        saved_count += 1
 
-        frame_count += 1
         pbar.update(1)
+
+        frame_count += interval
+        if frame_count <= end_frame:
+            cap.set(cv2.CAP_PROP_POS_FRAMES, frame_count)
 
     pbar.close()
     cap.release()
-    print(f"✅ 完成 {os.path.basename(video_path)}，提取 {saved_count} 张图片")
+    # print(f"✅ 完成 {os.path.basename(video_path)}，提取 {saved_count} 张图片")
     return saved_count
 
 def batch_extract_frames_multithread(input_dir, output_dir, interval=1, max_workers=4, start_frame=0, end_frame=0):
@@ -77,9 +87,9 @@ def batch_extract_frames_multithread(input_dir, output_dir, interval=1, max_work
 
 if __name__ == "__main__":
     # === 配置部分 ===
-    input_dir = "/home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/2"      # 视频目录
-    output_dir = "/home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/2"    # 图片保存目录
-    interval = 10     # 每隔多少帧保存一张
+    input_dir = "/home/hithcat/下载/reco/temp/dataset"      # 视频目录
+    output_dir = "/home/hithcat/Code/CRT/TraditionalLabel/datas/26unlabeled/home"    # 图片保存目录
+    interval = 5     # 每隔多少帧保存一张
     max_workers = 28  # 线程数，建议 = CPU核心数 或 核心数x2
     start_frame = 0   # 从视频的第几帧开始提取
     end_frame = 0     # 提取到视频的第几帧结束，0表示提取到结尾

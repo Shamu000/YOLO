@@ -5,6 +5,21 @@ remove_invalid_entries
 split_annotations
 split_dataset
 
+## 2.转换
+```bash
+export.py
+
+trtyolo-export \
+  -i /home/hithcat/Code/CRT/yolo/runs/pose/FinalTrain/weights/best.onnx \
+  -o /home/hithcat/Code/CRT/yolo/runs/pose/FinalTrain/weights/best-trtyolo.onnx \
+  -s
+
+
+
+
+
+```
+
 ###  split_annotations
 
 ```

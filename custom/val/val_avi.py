@@ -12,17 +12,17 @@ from ultralytics import YOLO
 # =========================
 # 直接在这里修改配置即可
 # =========================
-MODEL_PATH = "/home/hithcat/Code/CRT/yolo/runs/pose/train/weights/best.pt"
-AVI_PATH = "/home/hithcat/Code/CRT/26_new/rm_sentry_infantry_2026/tests/videos/records/4/2026-05-02_23-52-50_raw.avi"
+MODEL_PATH = "/home/hithcat/Code/CRT/yolo/runs/pose/v2-50%数据增强-401代/weights/last.pt"
+AVI_PATH = "/home/hithcat/Code/CRT/TraditionalLabel/datas/26unlabeled/tooltrain/2026-05-30_09-31-30_raw.avi"
 IMGSZ = 640
-CONF = 0.6
+CONF = 0.7
 IOU = 0.8
 KPT_CONF = 0.0  # 0.0 表示返回的关键点全部绘制
 DEVICE = "cuda"  # 可改为 "cpu"
 RADIUS = 4
 SHOW_WINDOW = False
 SAVE_OUTPUT = True
-OUTPUT_AVI_PATH = "/home/hithcat/Code/CRT/26_new/rm_sentry_infantry_2026/tests/videos/records/4/val_avi_output.avi"
+OUTPUT_AVI_PATH = "/home/hithcat/下载/output3.avi"
 
 
 def draw_keypoints(frame, result, kpt_conf_threshold: float, radius: int) -> None:
@@ -33,11 +33,21 @@ def draw_keypoints(frame, result, kpt_conf_threshold: float, radius: int) -> Non
     xy = keypoints.xy.cpu().numpy()  # (num_det, num_kpt, 2)
     conf = keypoints.conf.cpu().numpy() if keypoints.conf is not None else None
 
+    # 获取每个检测的类别，用于 R 类占位关键点过滤
+    boxes = result.boxes
+    det_cls = boxes.cls.cpu().numpy().astype(int) if boxes is not None else None
+    if det_cls is not None and len(det_cls) == 0:
+        det_cls = None
+
     num_dets = xy.shape[0]
     num_kpts = xy.shape[1] if xy.ndim >= 2 else 0
 
     for det_i in range(num_dets):
-        for kpt_i in range(num_kpts):
+        # R 类(1,3) 只绘制 kpt[0](R标记)，跳过占位关键点
+        cls_i = det_cls[det_i] if det_cls is not None else -1
+        start_kpt = 1 if cls_i in {1, 3} else 0
+
+        for kpt_i in range(start_kpt, num_kpts):
             if conf is not None and conf[det_i, kpt_i] < kpt_conf_threshold:
                 continue
 

@@ -1,31 +1,97 @@
 import os
+import sys
+# 确保项目本地 ultralytics 优先于 pip 安装版本
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
 from ultralytics import YOLO
+import matplotlib
+matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
 import matplotlib.pyplot as plt
 import pandas as pd
+import yaml
 
-# 你的短标签映射表
-category_mapping = {
-    0: "Red_Target_Light",
-    1: "Red_Target_Off",
-    2: "Blue_Target_Light",
-    3: "Blue_Target_Off"
-}
+# ===== 开关：是否保存所有 val batch 的预测图和标签图 =====
+# 默认 plots=True 只保存前 6 个 batch（且每 batch 最多展示 16 张图）到 runs/pose/val{N}/
+# 开启后保存全部 batch 至 runs/pose/allBatch/val{N}/，且每 batch 展示 batch_size 张图
+SAVE_ALL_BATCHES = True  # 改为 False 关闭
+
+if SAVE_ALL_BATCHES:
+    import torch
+    from ultralytics.models.yolo.pose.val import PoseValidator
+    from ultralytics.utils.plotting import plot_images, output_to_target
+
+    class _SaveAllBatchesPoseValidator(PoseValidator):
+        """扩展 PoseValidator：保存所有 batch 图像到 runs/pose/allBatch/"""
+
+        # ---- 重写绘图方法，增加 max_subplots 以展示 batch 中全部图像 ----
+        def plot_val_samples(self, batch, ni):
+            plot_images(
+                batch["img"],
+                batch["batch_idx"],
+                batch["cls"].squeeze(-1),
+                batch["bboxes"],
+                kpts=batch["keypoints"],
+                paths=batch["im_file"],
+                fname=self.save_dir / f"val_batch{ni}_labels.jpg",
+                names=self.names,
+                on_plot=self.on_plot,
+                max_subplots=self.args.batch,  # 展示 batch 中全部图像
+            )
+
+        def plot_predictions(self, batch, preds, ni):
+            pred_kpts = torch.cat([p[:, 6:].view(-1, *self.kpt_shape) for p in preds], 0) if preds else torch.zeros((0, self.kpt_shape[0], self.kpt_shape[1]))
+            plot_images(
+                batch["img"],
+                *output_to_target(preds, max_det=self.args.max_det),
+                kpts=pred_kpts,
+                paths=batch["im_file"],
+                fname=self.save_dir / f"val_batch{ni}_pred.jpg",
+                names=self.names,
+                on_plot=self.on_plot,
+                max_subplots=self.args.batch,  # 展示 batch 中全部图像
+            )
+
+        # ---- 重写 update_metrics：每个 batch 更新完指标后无条件保存图像 ----
+        def update_metrics(self, preds, batch):
+            super().update_metrics(preds, batch)
+            if self.args.plots:
+                self.plot_val_samples(batch, self.batch_i)
+                self.plot_predictions(batch, preds, self.batch_i)
+
+
+def load_category_names(yaml_path="custom/cfg/datasets.yaml"):
+    """从 datasets.yaml 读取类别名映射"""
+    with open(yaml_path, 'r') as f:
+        cfg = yaml.safe_load(f)
+    return cfg.get('names', {})
+
+
+category_mapping = load_category_names()
 
 def evaluate_pose_per_class(model_path, data_yaml, imgsz=640, batch_size=32):
     model = YOLO(model_path).to("cuda")
-    metrics = model.val(
+
+    # 公共参数
+    val_kwargs = dict(
         data=data_yaml,
         split="test",
         batch=batch_size,
         imgsz=imgsz,
-        conf=0.6,
+        conf=0.1,
         iou=0.55,
         max_det=200,
         agnostic_nms=True,
         verbose=False,
         plots=True,  # 启用绘图
-        save=True  # 启用结果保存（txt、PR曲线、confusion matrix等）
+        save=True,  # 启用结果保存（txt、PR曲线、confusion matrix等）
     )
+
+    if SAVE_ALL_BATCHES:
+        # 将所有 val 输出（含全部 batch 图像）保存到 runs/pose/allBatch/val{N}/
+        val_kwargs["project"] = "runs/pose/allBatch"
+        metrics = model.val(validator=_SaveAllBatchesPoseValidator, **val_kwargs)
+    else:
+        metrics = model.val(**val_kwargs)
 
     names = model.names
     # 测试集中实际出现过的类别索引（有时是 list，有时是 ndarray）
@@ -59,7 +125,7 @@ def evaluate_pose_per_class(model_path, data_yaml, imgsz=640, batch_size=32):
 if __name__ == "__main__":
     # === 配置部分 ===
     model_paths = [
-        "/home/hithcat/Code/CRT/yolo/runs/pose/train/weights/best.pt",
+        "/home/hithcat/Code/CRT/yolo/runs/pose/v2-50%数据增强-401代/weights/best.pt",
     ]
     data_yaml = "custom/cfg/datasets.yaml"
     imgsz, batch_size = 640, 32

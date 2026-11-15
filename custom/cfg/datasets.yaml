@@ -1,23 +1,22 @@
-path: /home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/5.2
+path: /home/hithcat/Code/CRT/TraditionalLabel/datas/home1_4Unityv1_qusai
 
 train:
-  - /home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/5.2/images/train
+  - /home/hithcat/Code/CRT/TraditionalLabel/datas/home1_4Unityv1_qusai/images/train
 
 val:
-  - /home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/5.2/images/val
+  - /home/hithcat/Code/CRT/TraditionalLabel/datas/home1_4Unityv1_qusai/images/val
 
 test:
-  - /home/hithcat/Code/CRT/TraditionalLabel/datas/labeled/home/test/4
+  - /home/hithcat/Code/CRT/TraditionalLabel/datas/test/v1
 
-kpt_shape: [6,2]
+kpt_shape: [5,2]
 
 # 0: R, 1: 圆靶中心, 2: 上, 3: 左, 4: 下, 5: 右
-# 0：R，1：上，2：左，3：右，4：圆靶中心，5：下
 
 names:
-  0: 'Red_Target_Light'
-  1: 'Red_Target_Off'
-  2: 'Blue_Target_Light'
-  3: 'Blue_Target_Off'
+  0: 'Red_Target'
+  1: 'Red_R'
+  2: 'Blue_Target'
+  3: 'Blue_R'
 
 
